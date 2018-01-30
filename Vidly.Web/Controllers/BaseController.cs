@@ -1,26 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using Vidly.Interfaces;
 
 namespace Vidly.Controllers
 {
-    public class BaseController<TModel, TViewModel> : Controller
+    public abstract class BaseController<TKey, TModel, TCriteria, TDomain> : Controller
+        where TModel    : class
+        where TCriteria : class
+        where TDomain   : class
     {
-        public IList<TModel> GetList()
+        protected IBO<TKey, TModel, TCriteria, TDomain> DefaultBO { get; set; }
+
+        public BaseController()
         {
-            return new List<TModel>();
+
         }
 
-        public TModel GetSingle()
+        [HttpGet]
+        public ActionResult Index()
         {
-            return (TModel)new Object();
+            var model = DefaultBO.ListAll();
+            return View(model);
         }
 
-        public TViewModel GetViewModel()
+        [HttpGet]
+        public ActionResult New()
         {
-            return (TViewModel)new Object();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Save(TModel model)
+        {
+            DefaultBO.Save(model);
+            return this.Index();
+        }
+
+        [HttpPost]
+        public ActionResult Delete(TKey id)
+        {
+            DefaultBO.Delete(id);
+            return this.Index();
         }
     }
 }

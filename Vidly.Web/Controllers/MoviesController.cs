@@ -1,23 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Vidly.Models;
-using Vidly.ViewModels;
+﻿using Vidly.Core.BO;
+using Vidly.Domain;
+using Vidly.TO;
 
 namespace Vidly.Controllers
 {
-    public class MoviesController : Controller
+    public class MoviesController : BaseController<long, MovieTO, MovieCriteriaTO, Movie>
     {
-        public ActionResult Index()
+        public MoviesController()
         {
-            var movies = new List<Movie>()
-            {
-                new Movie(){ Name = "Shrek"  },
-                new Movie(){ Name = "Wall-e" }
-            };
-            return View(movies);
+            this.DefaultBO = new MovieBO();
         }
     }
 }
