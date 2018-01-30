@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vidly.Web", "Vidly.Web\Vidly.Web.csproj", "{AE420E29-2B4E-4238-876D-D74E0564124B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vidly.Data", "Vidly\Vidly.Data.csproj", "{EF25F755-EEAA-4A73-8254-9840CE3701B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vidly.Data", "Vidly.Data\Vidly.Data.csproj", "{EF25F755-EEAA-4A73-8254-9840CE3701B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vidly.Core", "Vidly.Core\Vidly.Core.csproj", "{E35BE8E7-62A8-4E81-8685-B51282F9CC06}"
 EndProject
