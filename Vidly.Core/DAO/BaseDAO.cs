@@ -6,7 +6,7 @@ using Vidly.Interfaces;
 
 namespace Vidly.Core.DAO
 {
-    public class BaseDAO<TDomain, TCriteria> : IDAO<TDomain, TCriteria> 
+    public abstract class BaseDAO<TKey, TDomain, TCriteria> : IDAO<TKey, TDomain, TCriteria> 
         where TDomain : class
         where TCriteria : class
     {
@@ -19,7 +19,7 @@ namespace Vidly.Core.DAO
             this.DBSet   = this.Context.Set<TDomain>();
         }
 
-        public virtual TDomain Get(object id)
+        public virtual TDomain Get(TKey id)
         {
             return this.Context.Set<TDomain>().Find(id);
         }
@@ -41,7 +41,7 @@ namespace Vidly.Core.DAO
             return retList;
         }
 
-        public virtual void Delete(int id)
+        public virtual void Delete(TKey id)
         {
             var entry = this.Get(id);
             this.Delete(entry);

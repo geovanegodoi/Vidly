@@ -46,6 +46,7 @@
     <Compile Include="Interfaces\BO\IBO.cs" />
     <Compile Include="Interfaces\DAO\IDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TO\MovieCriteriaTO.cs" />
     <Compile Include="TO\CustomerCriteriaTO.cs" />
     <Compile Include="TO\CustomerTO.cs" />
     <Compile Include="TO\MovieTO.cs" />

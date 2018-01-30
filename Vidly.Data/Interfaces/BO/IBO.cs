@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace Vidly.Interfaces
 {
-    public interface IBO<TModel, TCriteria> 
+    public interface IBO<TKey, TModel, TCriteria, TDomain>
         where TModel : class
         where TCriteria : class
     {
-        TModel              Get     (int id);
+        TModel              Get     (TKey id);
         int                 Save    (TModel model);
         void                Delete  (TModel model);
-        void                Delete  (int id);
+        void                Delete  (TKey id);
+        IEnumerable<TModel> ListAll ();
         IEnumerable<TModel> Search  (TCriteria criteria);
     }
 }

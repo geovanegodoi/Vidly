@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Vidly.Interfaces
 {
-    public interface IDAO<TDomain, TCriteria> 
+    public interface IDAO<TKey, TDomain, TCriteria> 
         where TDomain : class
         where TCriteria : class
     {
-        TDomain              Get     (object id);
+        TDomain              Get     (TKey id);
         int                  Save    (TDomain model);
         void                 Delete  (TDomain model);
-        void                 Delete  (int id);
+        void                 Delete  (TKey id);
         IEnumerable<TDomain> Search  (TCriteria criteria);
     }
 }

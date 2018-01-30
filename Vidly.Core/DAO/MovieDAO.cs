@@ -7,11 +7,11 @@ using Vidly.TO;
 namespace Vidly.Core.DAO
 {
 
-    public class CustomerDAO : BaseDAO<long, Domain.Customer, TO.CustomerCriteriaTO>
+    public class MovieDAO : BaseDAO<long, Domain.Movie, TO.MovieCriteriaTO>
     {
-        public override IEnumerable<Customer> Search(CustomerCriteriaTO criteria)
+        public override IEnumerable<Movie> Search(MovieCriteriaTO criteria)
         {
-            var retValue = new List<Customer>();
+            var retValue = new List<Movie>();
 
             if (!String.IsNullOrEmpty(criteria.Name))
             {
