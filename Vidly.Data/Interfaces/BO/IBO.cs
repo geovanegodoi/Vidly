@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Vidly.Interfaces
 {
-    public interface IBO<TKey, TModel, TCriteria, TDomain>
-        where TModel : class
+    public interface IBO<TKey, TModel, TCriteria>
+        where TModel    : class
         where TCriteria : class
     {
         TModel              Get     (TKey id);

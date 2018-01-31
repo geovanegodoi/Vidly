@@ -4,7 +4,7 @@ using Vidly.Interfaces;
 
 namespace Vidly.Core.BO
 {
-    public abstract class BaseBO<TKey, TModel, TCriteria, TDomain> : IBO<TKey, TModel, TCriteria, TDomain>
+    public abstract class BaseBO<TKey, TModel, TCriteria, TDomain> : IBO<TKey, TModel, TCriteria>
         where TModel    : class
         where TCriteria : class
         where TDomain   : class

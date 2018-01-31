@@ -4,7 +4,7 @@ using Vidly.TO;
 
 namespace Vidly.Controllers
 {
-    public class MoviesController : BaseController<long, MovieTO, MovieCriteriaTO, Movie>
+    public class MoviesController : BaseController<long, MovieTO, MovieCriteriaTO>
     {
         public MoviesController()
         {

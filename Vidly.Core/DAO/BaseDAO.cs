@@ -36,7 +36,7 @@ namespace Vidly.Core.DAO
         {
             var retList = new List<TDomain>();
 
-            if (criteria is null)
+            if (criteria == null)
             {
                 retList = this.DBSet.ToList();
             }

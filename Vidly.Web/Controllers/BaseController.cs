@@ -5,12 +5,11 @@ using Vidly.Interfaces;
 
 namespace Vidly.Controllers
 {
-    public abstract class BaseController<TKey, TModel, TCriteria, TDomain> : Controller
+    public abstract class BaseController<TKey, TModel, TCriteria> : Controller
         where TModel    : class
         where TCriteria : class
-        where TDomain   : class
     {
-        protected IBO<TKey, TModel, TCriteria, TDomain> DefaultBO { get; set; }
+        protected IBO<TKey, TModel, TCriteria> DefaultBO { get; set; }
 
         public BaseController()
         {

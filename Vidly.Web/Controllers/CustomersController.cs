@@ -4,7 +4,7 @@ using Vidly.TO;
 
 namespace Vidly.Controllers
 {
-    public class CustomersController : BaseController<long, CustomerTO, CustomerCriteriaTO, Customer>
+    public class CustomersController : BaseController<long, CustomerTO, CustomerCriteriaTO>
     {
         public CustomersController()
         {
