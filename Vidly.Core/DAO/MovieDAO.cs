@@ -13,13 +13,13 @@ namespace Vidly.Core.DAO
         {
             var retValue = new List<Movie>();
 
-            if (!String.IsNullOrEmpty(criteria.Name))
-            {
-                retValue = this.DBSet.Where(c => c.Name.Equals(criteria.Name)).ToList();
-            }
-            else if (criteria == null)
+            if (criteria == null)
             {
                 retValue = base.Search(criteria).ToList();
+            }
+            else if (!String.IsNullOrEmpty(criteria.Name))
+            {
+                retValue = this.DBSet.Where(c => c.Name.Equals(criteria.Name)).ToList();
             }
             return retValue;
         }

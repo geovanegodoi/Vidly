@@ -10,13 +10,15 @@ namespace Vidly.Core.DAO
         where TDomain : class
         where TCriteria : class
     {
-        protected EntitiesContext Context { get; private set;  }
-        protected DbSet<TDomain>  DBSet   { get; private set;  }
+        protected EntitiesContext Context = new EntitiesContext();
+        protected DbSet<TDomain>  DBSet
+        {
+            get { return this.Context.Set<TDomain>(); }
+        }
 
         public BaseDAO()
         {
-            this.Context = new EntitiesContext();
-            this.DBSet   = this.Context.Set<TDomain>();
+            
         }
 
         public virtual TDomain Get(TKey id)
