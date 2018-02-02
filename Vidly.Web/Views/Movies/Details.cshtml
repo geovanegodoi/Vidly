@@ -1,0 +1,35 @@
+﻿@model Vidly.TO.MovieTO
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <h4>@Html.DisplayFor(model => model.Name)</h4>
+    <ul>
+        <li>
+            @Html.DisplayNameFor(model => model.Gender) :
+            @Html.DisplayFor(model => model.Gender.Name)
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.ReleaseDate) :
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.Added) :
+            @Html.DisplayFor(model => model.Added)
+        </li>
+        <li>
+            @Html.DisplayNameFor(model => model.Stock) :
+            @Html.DisplayFor(model => model.Stock)
+        </li>
+    </ul>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

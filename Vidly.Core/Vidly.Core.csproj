@@ -55,6 +55,7 @@
     <Compile Include="BO\MovieBO.cs" />
     <Compile Include="BO\CustomerBO.cs" />
     <Compile Include="DAO\BaseDAO.cs" />
+    <Compile Include="DAO\MembershipTypeDAO.cs" />
     <Compile Include="DAO\MovieDAO.cs" />
     <Compile Include="DAO\CustomerDAO.cs" />
     <Compile Include="DAO\EntitiesContext.cs" />

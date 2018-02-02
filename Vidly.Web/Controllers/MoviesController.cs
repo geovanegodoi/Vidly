@@ -1,4 +1,5 @@
-﻿using Vidly.Core.BO;
+﻿using System.Web.Mvc;
+using Vidly.Core.BO;
 using Vidly.Domain;
 using Vidly.TO;
 

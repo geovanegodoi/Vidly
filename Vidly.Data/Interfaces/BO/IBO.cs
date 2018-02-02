@@ -12,9 +12,9 @@ namespace Vidly.Interfaces
     {
         TModel              Get     (TKey id);
         int                 Save    (TModel model);
+        IEnumerable<TModel> Search  (TCriteria criteria);
+        IEnumerable<TModel> ListAll ( );
         void                Delete  (TModel model);
         void                Delete  (TKey id);
-        IEnumerable<TModel> ListAll ();
-        IEnumerable<TModel> Search  (TCriteria criteria);
     }
 }

@@ -11,9 +11,10 @@ namespace Vidly.Interfaces
         where TCriteria : class
     {
         TDomain              Get     (TKey id);
-        int                  Save    (TDomain model);
-        void                 Delete  (TDomain model);
-        void                 Delete  (TKey id);
+        int                  Save    (TDomain domain);
         IEnumerable<TDomain> Search  (TCriteria criteria);
+        IEnumerable<TDomain> ListAll ( );
+        void                 Delete  (TDomain domain);
+        void                 Delete  (TKey id);
     }
 }

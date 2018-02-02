@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Vidly.Domain
 {
-    [Table("CUSTOMERS", Schema="VIDLY")]
+    [Table("CUSTOMERS")]
     public class Customer
     {
         [Column("ID")]
@@ -10,5 +11,16 @@ namespace Vidly.Domain
 
         [Column("NAME")]
         public string Name { get; set; }
+
+        [Column("SUBSCRIBED")]
+        public bool IsSubscribedToNewsletter { get; set; }
+
+        [Column("MEMBERSHIPTYPEID")]
+        public byte MembershipTypeId { get; set; }
+
+        [Column("BIRTHDATE")]
+        public DateTime Birthdate { get; set; }
+
+        public MembershipType MembershipType { get; set; }
     }
 }

@@ -17,30 +17,44 @@ namespace Vidly.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public virtual ActionResult Index()
         {
             var model = DefaultBO.ListAll();
             return View(model);
         }
 
         [HttpGet]
-        public ActionResult New()
+        public virtual ActionResult Details(TKey id)
         {
-            return View();
+            var model = DefaultBO.Get(id);
+            return View(model);
+        }
+
+        [HttpGet]
+        public virtual ActionResult New()
+        {
+            return View("Save");
         }
 
         [HttpPost]
-        public ActionResult Save(TModel model)
+        public virtual ActionResult Save(TModel model)
         {
             DefaultBO.Save(model);
-            return this.Index();
+            return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public ActionResult Delete(TKey id)
+        [HttpGet]
+        public virtual ActionResult Edit(TKey id)
+        {
+            var model = DefaultBO.Get(id);
+            return View("Save", model);
+        }
+
+        [HttpGet]
+        public virtual ActionResult Delete(TKey id)
         {
             DefaultBO.Delete(id);
-            return this.Index();
+            return RedirectToAction("Index");
         }
     }
 }

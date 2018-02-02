@@ -20,7 +20,8 @@ namespace Vidly.Core.DAO
             modelBuilder.HasDefaultSchema("VIDLY");
 
             modelBuilder.Entity<Customer>().ToTable("CUSTOMERS");
-
+            modelBuilder.Entity<Gender>().ToTable("GENDERS");
+            modelBuilder.Entity<MembershipType>().ToTable("MEMBERSHIPTYPES");
             modelBuilder.Entity<Movie>().ToTable("MOVIES");
 
             base.OnModelCreating(modelBuilder);

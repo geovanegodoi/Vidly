@@ -16,31 +16,15 @@ namespace Vidly.Core.DAO
             get { return this.Context.Set<TDomain>(); }
         }
 
-        public BaseDAO()
-        {
-            
-        }
+        public abstract int Save(TDomain domain);
+
+        public abstract IEnumerable<TDomain> ListAll();
+
+        public abstract IEnumerable<TDomain> Search(TCriteria criteria);
 
         public virtual TDomain Get(TKey id)
         {
             return this.Context.Set<TDomain>().Find(id);
-        }
-
-        public virtual int Save(TDomain model)
-        {
-            this.DBSet.Add(model);
-            return this.Context.SaveChanges();
-        }
-
-        public virtual IEnumerable<TDomain> Search(TCriteria criteria)
-        {
-            var retList = new List<TDomain>();
-
-            if (criteria == null)
-            {
-                retList = this.DBSet.ToList();
-            }
-            return retList;
         }
 
         public virtual void Delete(TKey id)
