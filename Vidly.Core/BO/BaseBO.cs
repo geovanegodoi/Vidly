@@ -16,37 +16,37 @@ namespace Vidly.Core.BO
             
         }
 
-        public TModel Get(TKey id)
+        public virtual TModel Get(TKey id)
         {
             var domain = DefaultDAO.Get(id);
             return Mapper.Map<TModel>(domain);
         }
 
-        public int Save(TModel model)
+        public virtual int Save(TModel model)
         {
             TDomain domain = Mapper.Map<TDomain>(model);
             return DefaultDAO.Save(domain);
         }
 
-        public IEnumerable<TModel> Search(TCriteria criteria)
+        public virtual IEnumerable<TModel> Search(TCriteria criteria)
         {
             var domain = DefaultDAO.Search(criteria);
             return Mapper.Map<IEnumerable<TModel>>(domain);
         }
 
-        public IEnumerable<TModel> ListAll()
+        public virtual IEnumerable<TModel> ListAll()
         {
             var domain = DefaultDAO.ListAll();
             return Mapper.Map<IEnumerable<TModel>>(domain);
         }
 
-        public void Delete(TModel model)
+        public virtual void Delete(TModel model)
         {
             var domain = Mapper.Map<TDomain>(model);
             DefaultDAO.Delete(domain);
         }
 
-        public void Delete(TKey id)
+        public virtual void Delete(TKey id)
         {
             DefaultDAO.Delete(id);
         }

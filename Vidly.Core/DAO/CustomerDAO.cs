@@ -7,7 +7,6 @@ using Vidly.TO;
 
 namespace Vidly.Core.DAO
 {
-
     public class CustomerDAO : BaseDAO<long, Domain.Customer, TO.CustomerCriteriaTO>
     {
         public override Customer Get(long id)
