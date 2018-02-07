@@ -1,4 +1,4 @@
-﻿@model Vidly.TO.CustomerTO
+﻿@model Vidly.ViewModel.CustomerViewModel
 
 @{
     ViewBag.Title = "Save";
@@ -13,15 +13,24 @@
     
     <div class="form-horizontal">
         <h4>Customer</h4>
-        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.Customer.Id)
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
+            @Html.LabelFor(m => m.Customer.Name)
+            @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Customer.Birthdate)
+            @Html.TextBoxFor(m => m.Customer.Birthdate, new { @class = "form-control" })
+        </div>
+        <div class="checkbox">
+            <label>
+                @Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsletter) Subscribed to newsletter
+            </label>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Customer.MembershipType)
+            @Html.DropDownListFor(m => m.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

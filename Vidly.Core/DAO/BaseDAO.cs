@@ -7,7 +7,7 @@ using Vidly.Interfaces;
 namespace Vidly.Core.DAO
 {
     public abstract class BaseDAO<TKey, TDomain, TCriteria> : IDAO<TKey, TDomain, TCriteria> 
-        where TDomain : class
+        where TDomain   : class
         where TCriteria : class
     {
         protected EntitiesContext Context = new EntitiesContext();

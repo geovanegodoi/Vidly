@@ -5,11 +5,12 @@ using Vidly.Interfaces;
 
 namespace Vidly.Controllers
 {
-    public abstract class BaseController<TKey, TModel, TCriteria> : Controller
+    public abstract class BaseController<TKey, TModel, TCriteria, TBO> : Controller
         where TModel    : class
         where TCriteria : class
+        where TBO       : IBO<TKey, TModel, TCriteria>
     {
-        protected IBO<TKey, TModel, TCriteria> DefaultBO { get; set; }
+        protected TBO DefaultBO { get; set; }
 
         public BaseController()
         {
@@ -54,6 +55,20 @@ namespace Vidly.Controllers
         public virtual ActionResult Delete(TKey id)
         {
             DefaultBO.Delete(id);
+            return RedirectToAction("Index");
+        }
+    }
+
+    public abstract class BaseController<TKey, TModel, TViewModel, TCriteria, TBO> : BaseController<TKey, TModel, TCriteria, TBO>
+        where TModel     : class
+        where TViewModel : class
+        where TCriteria  : class
+        where TBO        : IBO<TKey, TModel, TViewModel, TCriteria>
+    {
+        [HttpPost]
+        public ActionResult Save(TViewModel viewModel)
+        {
+            DefaultBO.Save(viewModel);
             return RedirectToAction("Index");
         }
     }

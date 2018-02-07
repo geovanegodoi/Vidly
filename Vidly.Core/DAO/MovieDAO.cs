@@ -4,11 +4,12 @@ using System.Linq;
 using System.Data.Entity;
 using Vidly.Domain;
 using Vidly.TO;
+using Vidly.Interfaces.DAO;
 
 namespace Vidly.Core.DAO
 {
 
-    public class MovieDAO : BaseDAO<long, Domain.Movie, TO.MovieCriteriaTO>
+    public class MovieDAO : BaseDAO<long, Domain.Movie, TO.MovieCriteriaTO>, IMovieDAO
     {
         public override Movie Get(long id)
         {

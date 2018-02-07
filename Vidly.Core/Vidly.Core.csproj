@@ -60,6 +60,7 @@
     <Compile Include="DAO\CustomerDAO.cs" />
     <Compile Include="DAO\EntitiesContext.cs" />
     <Compile Include="Mappers\AutoMapperConfig.cs" />
+    <Compile Include="Mappers\ViewModelToModelMapping.cs" />
     <Compile Include="Mappers\ModelToDomainMapping.cs" />
     <Compile Include="Mappers\DomainToModelMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

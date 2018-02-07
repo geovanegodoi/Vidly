@@ -4,10 +4,11 @@ using System.Linq;
 using System.Data.Entity;
 using Vidly.Domain;
 using Vidly.TO;
+using Vidly.Interfaces.DAO;
 
 namespace Vidly.Core.DAO
 {
-    public class CustomerDAO : BaseDAO<long, Domain.Customer, TO.CustomerCriteriaTO>
+    public class CustomerDAO : BaseDAO<long, Domain.Customer, TO.CustomerCriteriaTO>, ICustomerDAO
     {
         public override Customer Get(long id)
         {

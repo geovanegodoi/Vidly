@@ -4,12 +4,13 @@ using Vidly.Interfaces;
 
 namespace Vidly.Core.BO
 {
-    public abstract class BaseBO<TKey, TModel, TCriteria, TDomain> : IBO<TKey, TModel, TCriteria>
+    public abstract class BaseBO<TKey, TModel, TCriteria, TDomain, TDAO> : IBO<TKey, TModel, TCriteria>
         where TModel    : class
         where TCriteria : class
         where TDomain   : class
+        where TDAO      : IDAO<TKey, TDomain, TCriteria>
     {
-        protected IDAO<TKey, TDomain, TCriteria> DefaultDAO { get; set; }
+        protected TDAO DefaultDAO { get; set; }
 
         public BaseBO()
         {
@@ -49,6 +50,20 @@ namespace Vidly.Core.BO
         public virtual void Delete(TKey id)
         {
             DefaultDAO.Delete(id);
+        }
+    }
+
+    public abstract class BaseBO<TKey, TModel, TViewModel, TCriteria, TDomain, TDAO> : BaseBO<TKey, TModel, TCriteria, TDomain, TDAO>, IBO
+        where TModel     : class
+        where TViewModel : class
+        where TCriteria  : class
+        where TDomain    : class
+        where TDAO       : IDAO<TKey, TDomain, TCriteria>
+    {
+        public int Save(TViewModel viewModel)
+        {
+            var model  = Mapper.Map<TModel>(viewModel);
+            return base.Save(model);
         }
     }
 }

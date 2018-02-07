@@ -10,6 +10,7 @@ namespace Vidly.Core.Mappers
             {
                 DomainToModelMapping.ApplyMapping(cfg);
                 ModelToDomainMapping.ApplyMapping(cfg);
+                ViewModelToModelMapping.ApplyMapping(cfg);
             });
         }
     }

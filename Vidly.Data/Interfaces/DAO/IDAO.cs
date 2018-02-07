@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Vidly.Interfaces
 {
-    public interface IDAO<TKey, TDomain, TCriteria> 
+    public interface IDAO { }
+
+    public interface IDAO<TKey, TDomain, in TCriteria> : IDAO
         where TDomain : class
         where TCriteria : class
     {
