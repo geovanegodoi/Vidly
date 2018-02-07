@@ -19,14 +19,20 @@ namespace Vidly.Core.BO
             this.MembershipTypeDAO = new MembershipTypeDAO();
         }
 
-        public CustomerViewModel NewCustomerViewModel()
+        public CustomerViewModel GetViewModel()
+        {
+            return GetViewModel(0);
+        }
+
+        public CustomerViewModel GetViewModel(long id)
         {
             var membershiptypes = Mapper.Map<IEnumerable<MembershipTypeTO>>(this.MembershipTypeDAO.ListAll());
+            var customer        = (id == 0) ? new CustomerTO() : Mapper.Map<CustomerTO>(DefaultDAO.Get(id));
 
             return new ViewModel.CustomerViewModel
             {
                 MembershipTypes = membershiptypes,
-                Customer        = new CustomerTO()
+                Customer        = customer
             };
         }
     }

@@ -13,12 +13,5 @@ namespace Vidly.Controllers
         {
             this.DefaultBO = new CustomerBO();
         }
-
-        [HttpGet]
-        public override ActionResult New()
-        {
-            var viewModel = this.DefaultBO.NewCustomerViewModel();
-            return View("Save", viewModel);
-        }
     }
 }

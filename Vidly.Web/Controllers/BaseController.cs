@@ -65,8 +65,22 @@ namespace Vidly.Controllers
         where TCriteria  : class
         where TBO        : IBO<TKey, TModel, TViewModel, TCriteria>
     {
+        [HttpGet]
+        public override ActionResult New()
+        {
+            var viewModel = DefaultBO.GetViewModel();
+            return View("Save", viewModel);
+        }
+
+        [HttpGet]
+        public override ActionResult Edit(TKey id)
+        {
+            var viewModel = DefaultBO.GetViewModel(id);
+            return View("Save", viewModel);
+        }
+
         [HttpPost]
-        public ActionResult Save(TViewModel viewModel)
+        public ActionResult SaveViewModel(TViewModel viewModel)
         {
             DefaultBO.Save(viewModel);
             return RedirectToAction("Index");
