@@ -8,15 +8,16 @@ using Vidly.Interfaces.DAO;
 
 namespace Vidly.Core.DAO
 {
-    public class CustomerDAO : BaseDAO<long, Domain.Customer, TO.CustomerCriteriaTO>, ICustomerDAO
+
+    public class MovieDAO : BaseDAO<long, Domain.Movie, TO.MovieCriteriaTO>, IMovieDAO
     {
-        public override Customer Get(long id)
+        public override Movie Get(long id)
         {
-            return this.DBSet.Include(i => i.MembershipType)
+            return this.DBSet.Include(i => i.Gender)
                        .FirstOrDefault(i => i.Id == id);
         }
 
-        public override int Save(Domain.Customer domain)
+        public override int Save(Domain.Movie domain)
         {
             if (domain.Id == 0)
             {
@@ -30,14 +31,14 @@ namespace Vidly.Core.DAO
             return this.Context.SaveChanges();
         }
 
-        public override IEnumerable<Customer> ListAll()
+        public override IEnumerable<Movie> ListAll()
         {
-            return this.Search(new CustomerCriteriaTO());
+            return this.Search(new MovieCriteriaTO());
         }
 
-        public override IEnumerable<Customer> Search(CustomerCriteriaTO criteria)
+        public override IEnumerable<Movie> Search(MovieCriteriaTO criteria)
         {
-            var retValue = this.DBSet.Include(i => i.MembershipType).AsQueryable();
+            var retValue = this.DBSet.Include(i => i.Gender).AsQueryable();
 
             if (!String.IsNullOrEmpty(criteria.Name))
                 retValue = this.DBSet.Where(c => c.Name == criteria.Name);

@@ -1,19 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Vidly.Interfaces
 {
-    public interface IBO<TModel, TCriteria> 
-        where TModel : class
+    public interface IBO { }
+
+    public interface IBO<TKey, TModel, TCriteria> : IBO
+        where TModel    : class
         where TCriteria : class
     {
-        TModel              Get     (int id);
+        TModel              Get     (TKey id);
         int                 Save    (TModel model);
-        void                Delete  (TModel model);
-        void                Delete  (int id);
         IEnumerable<TModel> Search  (TCriteria criteria);
+        IEnumerable<TModel> ListAll ();
+        void                Delete  (TKey id);
+        void                Delete  (TModel model);
+    }
+
+    public interface IBO<TKey, TModel, TViewModel, TCriteria> : IBO<TKey, TModel, TCriteria>
+        where TModel     : class
+        where TViewModel : class
+        where TCriteria  : class
+    {
+        int         Save(TViewModel viewModel);
+        TViewModel  GetViewModel();
+        TViewModel  GetViewModel(TKey id);
     }
 }

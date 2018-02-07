@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Vidly.Domain
 {
@@ -15,5 +11,16 @@ namespace Vidly.Domain
 
         [Column("NAME")]
         public string Name { get; set; }
+
+        [Column("SUBSCRIBED")]
+        public bool IsSubscribedToNewsletter { get; set; }
+
+        [Column("MEMBERSHIPTYPEID")]
+        public byte MembershipTypeId { get; set; }
+
+        [Column("BIRTHDATE")]
+        public DateTime Birthdate { get; set; }
+
+        public MembershipType MembershipType { get; set; }
     }
 }

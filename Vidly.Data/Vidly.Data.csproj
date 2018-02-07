@@ -41,17 +41,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Gender.cs" />
+    <Compile Include="Domain\MembershipType.cs" />
     <Compile Include="Domain\Movie.cs" />
     <Compile Include="Domain\Customer.cs" />
     <Compile Include="Interfaces\BO\IBO.cs" />
+    <Compile Include="Interfaces\BO\IMovieBO.cs" />
+    <Compile Include="Interfaces\BO\ICustomerBO.cs" />
+    <Compile Include="Interfaces\DAO\IMovieDAO.cs" />
+    <Compile Include="Interfaces\DAO\ICustomerDAO.cs" />
     <Compile Include="Interfaces\DAO\IDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TO\GenderTO.cs" />
+    <Compile Include="TO\MembershipTypeCriteriaTO.cs" />
+    <Compile Include="TO\MembershipTypeTO.cs" />
+    <Compile Include="TO\MovieCriteriaTO.cs" />
     <Compile Include="TO\CustomerCriteriaTO.cs" />
     <Compile Include="TO\CustomerTO.cs" />
     <Compile Include="TO\MovieTO.cs" />
+    <Compile Include="ViewModel\NewCustomerViewModel.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewData\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

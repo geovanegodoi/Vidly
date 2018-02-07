@@ -6,42 +6,28 @@ using Vidly.Interfaces;
 
 namespace Vidly.Core.DAO
 {
-    public class BaseDAO<TDomain, TCriteria> : IDAO<TDomain, TCriteria> 
-        where TDomain : class
+    public abstract class BaseDAO<TKey, TDomain, TCriteria> : IDAO<TKey, TDomain, TCriteria> 
+        where TDomain   : class
         where TCriteria : class
     {
-        protected EntitiesContext Context { get; private set;  }
-        protected DbSet<TDomain>  DBSet   { get; private set;  }
-
-        public BaseDAO()
+        protected EntitiesContext Context = new EntitiesContext();
+        protected DbSet<TDomain>  DBSet
         {
-            this.Context = new EntitiesContext();
-            this.DBSet   = this.Context.Set<TDomain>();
+            get { return this.Context.Set<TDomain>(); }
         }
 
-        public virtual TDomain Get(object id)
+        public abstract int Save(TDomain domain);
+
+        public abstract IEnumerable<TDomain> ListAll();
+
+        public abstract IEnumerable<TDomain> Search(TCriteria criteria);
+
+        public virtual TDomain Get(TKey id)
         {
             return this.Context.Set<TDomain>().Find(id);
         }
 
-        public virtual int Save(TDomain model)
-        {
-            this.DBSet.Add(model);
-            return this.Context.SaveChanges();
-        }
-
-        public virtual IEnumerable<TDomain> Search(TCriteria criteria)
-        {
-            var retList = new List<TDomain>();
-
-            if (criteria is null)
-            {
-                retList = this.DBSet.ToList();
-            }
-            return retList;
-        }
-
-        public virtual void Delete(int id)
+        public virtual void Delete(TKey id)
         {
             var entry = this.Get(id);
             this.Delete(entry);

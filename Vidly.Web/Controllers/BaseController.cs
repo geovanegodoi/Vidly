@@ -1,26 +1,89 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using Vidly.Interfaces;
 
 namespace Vidly.Controllers
 {
-    public class BaseController<TModel, TViewModel> : Controller
+    public abstract class BaseController<TKey, TModel, TCriteria, TBO> : Controller
+        where TModel    : class
+        where TCriteria : class
+        where TBO       : IBO<TKey, TModel, TCriteria>
     {
-        public IList<TModel> GetList()
+        protected TBO DefaultBO { get; set; }
+
+        public BaseController()
         {
-            return new List<TModel>();
+
         }
 
-        public TModel GetSingle()
+        [HttpGet]
+        public virtual ActionResult Index()
         {
-            return (TModel)new Object();
+            var model = DefaultBO.ListAll();
+            return View(model);
         }
 
-        public TViewModel GetViewModel()
+        [HttpGet]
+        public virtual ActionResult Details(TKey id)
         {
-            return (TViewModel)new Object();
+            var model = DefaultBO.Get(id);
+            return View(model);
+        }
+
+        [HttpGet]
+        public virtual ActionResult New()
+        {
+            return View("Save");
+        }
+
+        [HttpPost]
+        public virtual ActionResult Save(TModel model)
+        {
+            DefaultBO.Save(model);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public virtual ActionResult Edit(TKey id)
+        {
+            var model = DefaultBO.Get(id);
+            return View("Save", model);
+        }
+
+        [HttpGet]
+        public virtual ActionResult Delete(TKey id)
+        {
+            DefaultBO.Delete(id);
+            return RedirectToAction("Index");
+        }
+    }
+
+    public abstract class BaseController<TKey, TModel, TViewModel, TCriteria, TBO> : BaseController<TKey, TModel, TCriteria, TBO>
+        where TModel     : class
+        where TViewModel : class
+        where TCriteria  : class
+        where TBO        : IBO<TKey, TModel, TViewModel, TCriteria>
+    {
+        [HttpGet]
+        public override ActionResult New()
+        {
+            var viewModel = DefaultBO.GetViewModel();
+            return View("Save", viewModel);
+        }
+
+        [HttpGet]
+        public override ActionResult Edit(TKey id)
+        {
+            var viewModel = DefaultBO.GetViewModel(id);
+            return View("Save", viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult SaveViewModel(TViewModel viewModel)
+        {
+            DefaultBO.Save(viewModel);
+            return RedirectToAction("Index");
         }
     }
 }

@@ -11,9 +11,23 @@ namespace Vidly.Domain
     public class Movie
     {
         [Column("ID")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Column("NAME")]
         public string Name { get; set; }
+
+        [Column("GENDERID")]
+        public long GenderId { get; set; }
+
+        [Column("RELEASEDATE")]
+        public DateTime ReleaseDate { get; set; }
+
+        [Column("ADDED")]
+        public DateTime Added { get; set; }
+
+        [Column("STOCK")]
+        public int Stock { get; set; }
+
+        public Gender Gender { get; set; }
     }
 }
