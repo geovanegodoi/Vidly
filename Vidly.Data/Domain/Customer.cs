@@ -19,7 +19,7 @@ namespace Vidly.Domain
         public byte MembershipTypeId { get; set; }
 
         [Column("BIRTHDATE")]
-        public DateTime Birthdate { get; set; }
+        public Nullable<DateTime> Birthdate { get; set; }
 
         public MembershipType MembershipType { get; set; }
     }

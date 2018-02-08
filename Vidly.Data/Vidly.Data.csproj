@@ -60,6 +60,7 @@
     <Compile Include="TO\CustomerCriteriaTO.cs" />
     <Compile Include="TO\CustomerTO.cs" />
     <Compile Include="TO\MovieTO.cs" />
+    <Compile Include="Validation\Min18YearsIfAMember.cs" />
     <Compile Include="ViewModel\MovieViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
   </ItemGroup>
