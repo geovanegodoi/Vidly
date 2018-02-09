@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vidly.Validation;
 
 namespace Vidly.TO
 {
@@ -21,6 +22,11 @@ namespace Vidly.TO
 
         public MembershipTypeTO MembershipType { get; set; }
 
+<<<<<<< HEAD
         public DateTime Birthdate { get; set; }
+=======
+        [Min18YearsIfAMember]
+        public Nullable<DateTime> Birthdate { get; set; }
+>>>>>>> dev
     }
 }

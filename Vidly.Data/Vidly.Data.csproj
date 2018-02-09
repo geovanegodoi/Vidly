@@ -53,13 +53,23 @@
     <Compile Include="Interfaces\DAO\IDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TO\GenderTO.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="TO\GenderCriteriaTO.cs" />
+>>>>>>> dev
     <Compile Include="TO\MembershipTypeCriteriaTO.cs" />
     <Compile Include="TO\MembershipTypeTO.cs" />
     <Compile Include="TO\MovieCriteriaTO.cs" />
     <Compile Include="TO\CustomerCriteriaTO.cs" />
     <Compile Include="TO\CustomerTO.cs" />
     <Compile Include="TO\MovieTO.cs" />
+<<<<<<< HEAD
     <Compile Include="ViewModel\NewCustomerViewModel.cs" />
+=======
+    <Compile Include="Validation\Min18YearsIfAMember.cs" />
+    <Compile Include="ViewModel\MovieViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModel.cs" />
+>>>>>>> dev
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
