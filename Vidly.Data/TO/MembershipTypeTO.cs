@@ -17,5 +17,11 @@ namespace Vidly.TO
         public byte DiscountRate { get; set; }
 
         public string Name { get; set; }
+<<<<<<< HEAD
+=======
+
+        public static readonly byte Unknown    = 0;
+        public static readonly byte PayAsYouGo = 1;
+>>>>>>> dev
     }
 }
