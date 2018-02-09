@@ -1,11 +1,9 @@
-<<<<<<< HEAD
 ﻿using System;
 using Vidly.Core.DAO;
 using Vidly.Domain;
 using Vidly.Interfaces.BO;
 using Vidly.Interfaces.DAO;
 using Vidly.TO;
-<<<<<<< HEAD
 
 namespace Vidly.Core.BO
 {
