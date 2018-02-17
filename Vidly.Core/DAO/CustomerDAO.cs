@@ -16,7 +16,7 @@ namespace Vidly.Core.DAO
                        .FirstOrDefault(i => i.Id == id);
         }
 
-        public override int Save(Domain.Customer domain)
+        public override long Save(Domain.Customer domain)
         {
             if (domain.Id == 0)
             {

@@ -23,7 +23,7 @@ namespace Vidly.Core.BO
             return Mapper.Map<TModel>(domain);
         }
 
-        public virtual int Save(TModel model)
+        public virtual TKey Save(TModel model)
         {
             TDomain domain = Mapper.Map<TDomain>(model);
             return DefaultDAO.Save(domain);
@@ -60,7 +60,7 @@ namespace Vidly.Core.BO
         where TDomain    : class
         where TDAO       : IDAO<TKey, TDomain, TCriteria>
     {
-        public int Save(TViewModel viewModel)
+        public TKey Save(TViewModel viewModel)
         {
             var model  = Mapper.Map<TModel>(viewModel);
             return base.Save(model);

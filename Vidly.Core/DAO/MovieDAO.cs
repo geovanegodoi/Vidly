@@ -17,7 +17,7 @@ namespace Vidly.Core.DAO
                        .FirstOrDefault(i => i.Id == id);
         }
 
-        public override int Save(Domain.Movie domain)
+        public override long Save(Domain.Movie domain)
         {
             if (domain.Id == 0)
             {

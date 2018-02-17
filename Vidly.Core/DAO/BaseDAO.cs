@@ -16,7 +16,7 @@ namespace Vidly.Core.DAO
             get { return this.Context.Set<TDomain>(); }
         }
 
-        public abstract int Save(TDomain domain);
+        public abstract TKey Save(TDomain domain);
 
         public abstract IEnumerable<TDomain> ListAll();
 
