@@ -22,11 +22,7 @@ namespace Vidly.TO
 
         public MembershipTypeTO MembershipType { get; set; }
 
-<<<<<<< HEAD
-        public DateTime Birthdate { get; set; }
-=======
         [Min18YearsIfAMember]
         public Nullable<DateTime> Birthdate { get; set; }
->>>>>>> dev
     }
 }
