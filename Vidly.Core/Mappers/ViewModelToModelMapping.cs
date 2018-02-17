@@ -7,13 +7,6 @@ namespace Vidly.Core.Mappers
         public static void ApplyMapping(IMapperConfigurationExpression cfg)
         {
             cfg.CreateMap<ViewModel.CustomerViewModel, TO.CustomerTO>()
-<<<<<<< HEAD
-               .ForMember(dst => dst.Id                       , opt => opt.MapFrom(src => src.Customer.Id))
-               .ForMember(dst => dst.Name                     , opt => opt.MapFrom(src => src.Customer.Name))
-               .ForMember(dst => dst.IsSubscribedToNewsletter , opt => opt.MapFrom(src => src.Customer.IsSubscribedToNewsletter))
-               .ForMember(dst => dst.MembershipTypeId         , opt => opt.MapFrom(src => src.Customer.MembershipTypeId))
-               .ForMember(dst => dst.Birthdate                , opt => opt.MapFrom(src => src.Customer.Birthdate));
-=======
                .ForMember(dst => dst.Id                       , opt => opt.MapFrom(src => src.Customer.Id                      ))
                .ForMember(dst => dst.Name                     , opt => opt.MapFrom(src => src.Customer.Name                    ))
                .ForMember(dst => dst.IsSubscribedToNewsletter , opt => opt.MapFrom(src => src.Customer.IsSubscribedToNewsletter))
@@ -27,7 +20,6 @@ namespace Vidly.Core.Mappers
                 .ForMember(dst => dst.ReleaseDate , opt => opt.MapFrom(src => src.Movie.ReleaseDate))
                 .ForMember(dst => dst.Added       , opt => opt.MapFrom(src => src.Movie.Added      ))
                 .ForMember(dst => dst.Stock       , opt => opt.MapFrom(src => src.Movie.Stock      ));
->>>>>>> dev
         }
     }
 }

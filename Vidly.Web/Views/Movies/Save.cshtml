@@ -1,4 +1,4 @@
-﻿@model Vidly.TO.MovieTO
+﻿@model Vidly.ViewModel.MovieViewModel
 
 @{
     ViewBag.Title = "Save";
@@ -7,22 +7,29 @@
 
 <h2>New</h2>
 
-@using (Html.BeginForm("Save", "Movies")) 
+@using (Html.BeginForm("SaveViewModel", "Movies"))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Movie</h4>
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.GenderId)
+        <h4>Customer</h4>
+        @Html.HiddenFor(model => model.Movie.Id)
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            @Html.LabelFor(m => m.Movie.Name)
+            @Html.TextBoxFor(m => m.Movie.Name, new { @class = "form-control", required = "required" })
             </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Movie.ReleaseDate)
+            @Html.TextBoxFor(m => m.Movie.ReleaseDate, new { @class = "form-control", required = "required" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Movie.Stock)
+            @Html.TextBoxFor(m => m.Movie.Stock, new { @class = "form-control", required = "required" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Movie.Gender)
+            @Html.DropDownListFor(m => m.Movie.GenderId, new SelectList(Model.Genders, "Id", "Name"), "Select Gender", new { @class = "form-control", required = "required" })
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
