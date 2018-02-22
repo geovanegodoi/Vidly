@@ -7,7 +7,7 @@ namespace Vidly.Domain
     public class Customer
     {
         [Column("ID")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Column("NAME")]
         public string Name { get; set; }

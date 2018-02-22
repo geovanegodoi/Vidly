@@ -28,6 +28,10 @@ namespace Vidly.Controllers
         public virtual ActionResult Details(TKey id)
         {
             var model = DefaultBO.Get(id);
+
+            if (model == null)
+                return new HttpNotFoundResult();
+
             return View(model);
         }
 

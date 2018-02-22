@@ -27,7 +27,9 @@ namespace Vidly.Core.DAO
                 var entity = this.Get(domain.Id);
                 this.Context.Entry(entity).CurrentValues.SetValues(domain);
             }
-            return this.Context.SaveChanges();
+            this.Context.SaveChanges();
+
+            return domain.Id;
         }
 
         public override IEnumerable<Customer> ListAll()

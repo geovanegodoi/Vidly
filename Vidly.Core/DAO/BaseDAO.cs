@@ -30,6 +30,10 @@ namespace Vidly.Core.DAO
         public virtual void Delete(TKey id)
         {
             var entry = this.Get(id);
+
+            if (entry == null)
+                throw new KeyNotFoundException("Key not found");
+
             this.Delete(entry);
         }
 
