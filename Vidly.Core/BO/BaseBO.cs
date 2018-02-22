@@ -20,6 +20,10 @@ namespace Vidly.Core.BO
         public virtual TModel Get(TKey id)
         {
             var domain = DefaultDAO.Get(id);
+
+            if (domain == null)
+                throw new KeyNotFoundException();
+
             return Mapper.Map<TModel>(domain);
         }
 

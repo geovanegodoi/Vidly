@@ -26,18 +26,29 @@ namespace Vidly.Controllers
         }
 
         [HttpGet]
-        public TModel Get(TKey id)
+        public IHttpActionResult Get(TKey id)
         {
-            return DefaultBO.Get(id);
+            IHttpActionResult httpResult = NotFound();
+            try
+            {
+                httpResult = Ok(DefaultBO.Get(id));
+            }
+            catch (KeyNotFoundException)
+            {
+                httpResult = NotFound();
+            }
+            return httpResult;
         }
 
         [HttpPost]
-        public TKey Save(TModel model)
+        public IHttpActionResult Save(TModel model)
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
 
-            return DefaultBO.Save(model);
+            var result = DefaultBO.Save(model);
+
+            return Created(new Uri(Request.RequestUri + "/" + result), result);
         }
 
         [HttpDelete]
