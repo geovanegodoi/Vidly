@@ -16,7 +16,7 @@ namespace Vidly.Core.DAO
                        .FirstOrDefault(i => i.Id == id);
         }
 
-        public override int Save(Domain.Customer domain)
+        public override long Save(Domain.Customer domain)
         {
             if (domain.Id == 0)
             {
@@ -27,7 +27,9 @@ namespace Vidly.Core.DAO
                 var entity = this.Get(domain.Id);
                 this.Context.Entry(entity).CurrentValues.SetValues(domain);
             }
-            return this.Context.SaveChanges();
+            this.Context.SaveChanges();
+
+            return domain.Id;
         }
 
         public override IEnumerable<Customer> ListAll()

@@ -7,7 +7,7 @@ namespace Vidly.Domain
     public class Customer
     {
         [Column("ID")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Column("NAME")]
         public string Name { get; set; }
@@ -16,7 +16,7 @@ namespace Vidly.Domain
         public bool IsSubscribedToNewsletter { get; set; }
 
         [Column("MEMBERSHIPTYPEID")]
-        public byte MembershipTypeId { get; set; }
+        public long MembershipTypeId { get; set; }
 
         [Column("BIRTHDATE")]
         public Nullable<DateTime> Birthdate { get; set; }

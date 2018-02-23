@@ -11,7 +11,7 @@ namespace Vidly.Domain
     public class MembershipType
     {
         [Column("ID")]
-        public byte Id { get; set; }
+        public long Id { get; set; }
 
         [Column("SIGNUPFEE")]
         public short SignUpFee { get; set; }
