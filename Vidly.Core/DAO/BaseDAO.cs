@@ -16,7 +16,7 @@ namespace Vidly.Core.DAO
             get { return this.Context.Set<TDomain>(); }
         }
 
-        public abstract int Save(TDomain domain);
+        public abstract TKey Save(TDomain domain);
 
         public abstract IEnumerable<TDomain> ListAll();
 
@@ -30,6 +30,10 @@ namespace Vidly.Core.DAO
         public virtual void Delete(TKey id)
         {
             var entry = this.Get(id);
+
+            if (entry == null)
+                throw new KeyNotFoundException("Key not found");
+
             this.Delete(entry);
         }
 

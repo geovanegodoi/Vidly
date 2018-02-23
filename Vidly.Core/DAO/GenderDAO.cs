@@ -9,7 +9,7 @@ namespace Vidly.Core.DAO
 
     public class GenderDAO : BaseDAO<long, Domain.Gender, TO.GenderCriteriaTO>
     {
-        public override int Save(Gender domain)
+        public override long Save(Gender domain)
         {
             if (domain.Id == 0)
             {

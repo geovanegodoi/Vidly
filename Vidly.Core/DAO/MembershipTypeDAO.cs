@@ -9,7 +9,7 @@ namespace Vidly.Core.DAO
 
     public class MembershipTypeDAO : BaseDAO<long, Domain.MembershipType, TO.MembershipTypeCriteriaTO>
     {
-        public override int Save(MembershipType domain)
+        public override long Save(MembershipType domain)
         {
             if (domain.Id == 0)
             {

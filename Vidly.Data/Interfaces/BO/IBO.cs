@@ -9,7 +9,7 @@ namespace Vidly.Interfaces
         where TCriteria : class
     {
         TModel              Get     (TKey id);
-        int                 Save    (TModel model);
+        TKey                Save    (TModel model);
         IEnumerable<TModel> Search  (TCriteria criteria);
         IEnumerable<TModel> ListAll ();
         void                Delete  (TKey id);
@@ -21,7 +21,7 @@ namespace Vidly.Interfaces
         where TViewModel : class
         where TCriteria  : class
     {
-        int         Save(TViewModel viewModel);
+        TKey        Save(TViewModel viewModel);
         TViewModel  GetViewModel();
         TViewModel  GetViewModel(TKey id);
     }
