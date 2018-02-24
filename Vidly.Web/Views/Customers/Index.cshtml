@@ -62,7 +62,7 @@ else
 
         $(document).ready(function () {
 
-            $("#customers .js-delete").on("click", function (e) {
+            $("#customers").on("click", ".js-delete", function (e) {
                 e.preventDefault();
                 var button = $(this);
                 bootbox.confirm("Are you sure you want to delete this customer?", function (result) {

@@ -58,7 +58,7 @@ else
 
         $(document).ready(function () {
 
-            $("#movies .js-delete").click(function (e) {
+            $("#movies").on("click", ".js-delete", function (e) {
                 e.preventDefault();
                 var button = $(this);
                 bootbox.confirm("Are you sure you want to delete this movie?", function (result) {
