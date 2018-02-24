@@ -20,7 +20,8 @@ namespace Vidly.Controllers
         [HttpGet]
         public virtual ActionResult Index()
         {
-            return View();
+            var model = DefaultBO.ListAll();
+            return View(model);
         }
 
         [HttpGet]
