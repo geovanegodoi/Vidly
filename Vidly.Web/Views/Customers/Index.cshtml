@@ -6,67 +6,49 @@
 }
 
 <h2>Customers</h2>
-<table id="customers" class="table table-hover">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Name)</th>
-            <th>@Html.DisplayNameFor(model => model.MembershipType)</th>
-            <th>@Html.DisplayNameFor(model => model.MembershipType.DiscountRate)</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody></tbody>
+
+@if (Model.Count() == 0)
+{
+    <text>We do not any customer</text>
+}
+else
+{ 
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MembershipType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MembershipType.DiscountRate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var customer in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => customer.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => customer.MembershipType.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => customer.MembershipType.DiscountRate)%
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = customer.Id }) |
+            @Html.ActionLink("Edit", "Edit", new { id = customer.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = customer.Id })
+        </td>
+    </tr>
+    }
 
 </table>
 <p>
-    @Html.ActionLink("New Customer", "New", "Customers", null, new { @class = "btn btn-success btn-sm" })
+    @Html.ActionLink("Create New", "New")
 </p>
-@section scripts
-{
-    <script>
-        var jsTable   = "#customers";
-        var urlGetApi = "/api/customers";
-
-        $(document).ready(function () {
-
-            var t = $(jsTable).DataTable({
-                ajax: {
-                    url: urlGetApi,
-                    dataSrc: ""
-                },
-                columns: [
-                    {
-                        data: "name"
-                    },
-                    {
-                        data: "membershipType.name"
-                    },
-                    {
-                        data: "membershipType.discountRate"
-                    },
-                    {
-                        data: "id",
-                        render: function (data) {
-                            return "<button data-customer-id=" + data + " class='btn btn-danger btn-sm btn-block js-delete'>Delete</button>"
-                        }
-                    }
-                ]
-            });
-            $(jsTable).on("click", ".js-delete", function (e) {
-                e.preventDefault();
-                var button = $(this);
-                bootbox.confirm("Are you sure you want to delete this customer?", function (result) {
-                    if (result) {
-                        $.ajax({
-                            url: urlGetApi + button.attr("data-customer-id"),
-                            method: "DELETE",
-                            success: function () {
-                                dtTable.row(button.parents("tr")).remove().draw();
-                            }
-                        });
-                    }
-                });
-            });
-        });
-    </script>
 }
