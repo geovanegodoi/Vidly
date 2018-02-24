@@ -24,13 +24,14 @@
 @section scripts
 {
     <script>
-        var jsTable = "#customers";
+        var jsTable   = "#customers";
+        var urlGetApi = "/api/customers";
 
         $(document).ready(function () {
 
-            $(jsTable).DataTable({
+            var t = $(jsTable).DataTable({
                 ajax: {
-                    url: "api/customers",
+                    url: urlGetApi,
                     dataSrc: ""
                 },
                 columns: [
@@ -57,10 +58,10 @@
                 bootbox.confirm("Are you sure you want to delete this customer?", function (result) {
                     if (result) {
                         $.ajax({
-                            url: "~/api/customers/" + button.attr("data-customer-id"),
+                            url: urlGetApi + button.attr("data-customer-id"),
                             method: "DELETE",
                             success: function () {
-                                button.parents("tr").remove();
+                                dtTable.row(button.parents("tr")).remove().draw();
                             }
                         });
                     }

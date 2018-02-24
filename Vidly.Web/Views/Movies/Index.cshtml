@@ -28,9 +28,9 @@
 
         $(document).ready(function () {
 
-            $(jsTable).DataTable({
+            var dtTable = $(jsTable).DataTable({
                 ajax: {
-                    url: "api/movies",
+                    url: "/api/movies",
                     dataSrc: ""
                 },
                 columns: [
@@ -57,7 +57,7 @@
                             url: "/api/movies/" + button.attr("data-movie-id"),
                             method: "DELETE",
                             success: function () {
-                                button.parents("tr").remove();
+                                dtTable.row(button.parents("tr")).remove().draw();
                             }
                         });
                     }
