@@ -1,10 +1,8 @@
 ﻿@model IEnumerable<Vidly.TO.MovieTO>
 
 @{
-                /**/
-
-                ViewBag.Title = "Index";
-                Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Movies</h2>
@@ -15,37 +13,28 @@
 }
 else
 {
-    <table id="movies" class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gender)
-            </th>
-            <th colspan="3"></th>
-        </tr>
-
+    <table id="movies" class="table table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Gender)</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
         @foreach (var movie in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => movie.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => movie.Gender.Name)
-                </td>
-                <td>
-                    <button data-movie-id="@movie.Id" class="btn btn-primary btn-sm btn-block js-details">Details</button>
-                </td>
-                <td>
-                    <button data-movie-id="@movie.Id" class="btn btn-secondary btn-sm btn-block js-edit">Edit</button>
-                </td>
-                <td>
-                    <button data-movie-id="@movie.Id" class="btn btn-danger btn-sm btn-block js-delete">Delete</button>
-                </td>
+                <td>@Html.DisplayFor(modelItem => movie.Name)</td>
+                <td>@Html.DisplayFor(modelItem => movie.Gender.Name)</td>
+                <td><button data-movie-id="@movie.Id" class="btn btn-primary btn-sm btn-block js-details">Details</button></td>
+                <td><button data-movie-id="@movie.Id" class="btn btn-secondary btn-sm btn-block js-edit">Edit</button></td>
+                <td><button data-movie-id="@movie.Id" class="btn btn-danger btn-sm btn-block js-delete">Delete</button></td>
             </tr>
         }
+        </tbody>
 
     </table>
     <p>
@@ -56,9 +45,13 @@ else
 {
     <script>
 
+        var jsTable = "#movies";
+
         $(document).ready(function () {
 
-            $("#movies").on("click", ".js-delete", function (e) {
+            $(jsTable).DataTable();
+
+            $(jsTable).on("click", ".js-delete", function (e) {
                 e.preventDefault();
                 var button = $(this);
                 bootbox.confirm("Are you sure you want to delete this movie?", function (result) {

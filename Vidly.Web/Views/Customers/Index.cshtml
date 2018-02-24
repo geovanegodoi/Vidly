@@ -12,55 +12,41 @@
     <text>We do not any customer</text>
 }
 else
-{ 
-<table id="customers" class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MembershipType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MembershipType.DiscountRate)
-        </th>
-        <th colspan="3"></th>
-    </tr>
+{
+    <table id="customers" class="table table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.MembershipType)</th>
+                <th>@Html.DisplayNameFor(model => model.MembershipType.DiscountRate)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var customer in Model)
+        {
 
-    @foreach (var customer in Model)
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => customer.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => customer.MembershipType.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => customer.MembershipType.DiscountRate)%
-        </td>
-        <td>
-            <button data-customer-id="@customer.Id" class="btn btn-primary btn-sm btn-block js-details">Details</button>
-        </td>
-        <td>
-            <button data-customer-id="@customer.Id" class="btn btn-secondary btn-sm btn-block js-edit">Edit</button>
-        </td>
-        <td>
-            <button data-customer-id="@customer.Id" class="btn btn-danger btn-sm btn-block js-delete">Delete</button>
-        </td>
-    </tr>
-    }
+            <tr>
+                <td>@Html.DisplayFor(modelItem => customer.Name)</td>
+                <td>@Html.DisplayFor(modelItem => customer.MembershipType.Name)</td>
+                <td>@Html.DisplayFor(modelItem => customer.MembershipType.DiscountRate)</td>
+                <td><button data-customer-id="@customer.Id" class="btn btn-danger btn-sm btn-block js-delete">Delete</button></td>
+            </tr>
 
-</table>
-<p>
-    @Html.ActionLink("New Customer", "New", "Customers", null, new { @class = "btn btn-success btn-sm" })
-</p>
+        }
+        </tbody>
+
+    </table>
+    <p>
+        @Html.ActionLink("New Customer", "New", "Customers", null, new { @class = "btn btn-success btn-sm" })
+    </p>
 }
 @section scripts
 {
     <script>
-
         $(document).ready(function () {
+
+            $("#customers").DataTable();
 
             $("#customers").on("click", ".js-delete", function (e) {
                 e.preventDefault();
@@ -78,6 +64,5 @@ else
                 });
             });
         });
-
     </script>
 }
