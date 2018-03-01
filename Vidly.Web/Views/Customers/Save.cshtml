@@ -1,11 +1,10 @@
 ﻿@model Vidly.ViewModel.CustomerViewModel
 
 @{
-    ViewBag.Title = "Save";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>New</h2>
+<h2>Customer</h2>
 
 @using (Html.BeginForm("SaveViewModel", "Customers"))
 {
@@ -13,7 +12,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Customer</h4>
         @Html.HiddenFor(model => model.Customer.Id)
         <hr />
         <div class="form-group">

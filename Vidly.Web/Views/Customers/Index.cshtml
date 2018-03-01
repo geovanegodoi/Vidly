@@ -1,30 +1,31 @@
 ﻿@model IEnumerable<Vidly.TO.CustomerTO>
-
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Customers</h2>
-<table id="customers" class="table table-hover">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Name)</th>
-            <th>@Html.DisplayNameFor(model => model.MembershipType)</th>
-            <th>@Html.DisplayNameFor(model => model.MembershipType.DiscountRate)</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-
-</table>
-<p>
-    @Html.ActionLink("New Customer", "New", "Customers", null, new { @class = "btn btn-success btn-sm" })
-</p>
+<div class="container" style="background-color:whitesmoke; border-radius:6px 6px 6px 6px">
+    <h2>Customers</h2>
+    <hr />
+    <div class="container" style="padding:15px 15px 15px 15px">
+        <table id="customers" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.MembershipType)</th>
+                    <th>@Html.DisplayNameFor(model => model.MembershipType.DiscountRate)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<br />
+@Html.ActionLink("New Customer", "New", "Customers", null, new { @class = "btn btn-success btn-sm" })
 @section scripts
 {
     <script>
-        var jsTable   = "#customers";
+        var jsTable = "#customers";
         var urlGetApi = "/api/customers";
 
         $(document).ready(function () {
