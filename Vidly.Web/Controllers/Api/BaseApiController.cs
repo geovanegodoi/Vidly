@@ -41,6 +41,7 @@ namespace Vidly.Controllers
         }
 
         [HttpPost]
+        [HttpPut]
         public IHttpActionResult Save(TModel model)
         {
             if (!ModelState.IsValid)
