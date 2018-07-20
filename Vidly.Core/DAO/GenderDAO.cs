@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Vidly.Domain;
+using Vidly.Interfaces.DAO;
 using Vidly.TO;
 
 namespace Vidly.Core.DAO
 {
 
-    public class GenderDAO : BaseDAO<long, Domain.Gender, TO.GenderCriteriaTO>
+    public class GenderDAO : BaseDAO<long, Domain.Gender, TO.GenderCriteriaTO>, IGenderDAO
     {
         public override long Save(Gender domain)
         {
@@ -23,18 +23,15 @@ namespace Vidly.Core.DAO
             return this.Context.SaveChanges();
         }
 
-        public override IEnumerable<Gender> ListAll()
-        {
-            return this.Search(new GenderCriteriaTO());
-        }
-
         public override IEnumerable<Gender> Search(GenderCriteriaTO criteria)
         {
             var retValue = this.DBSet.AsQueryable();
 
-            if (!string.IsNullOrEmpty(criteria.Name))
-                retValue = this.DBSet.Where(c => c.Name == criteria.Name);
-
+            if (criteria != null)
+            {
+                if (!string.IsNullOrEmpty(criteria.Name))
+                    retValue = this.DBSet.Where(c => c.Name == criteria.Name);
+            }
             return retValue.ToList();
         }
     }

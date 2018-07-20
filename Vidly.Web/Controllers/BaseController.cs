@@ -83,7 +83,7 @@ namespace Vidly.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveViewModel(TViewModel viewModel)
+        public virtual ActionResult SaveViewModel(TViewModel viewModel)
         {
             DefaultBO.Save(viewModel);
             return RedirectToAction("Index");

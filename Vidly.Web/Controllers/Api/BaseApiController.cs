@@ -21,8 +21,7 @@ namespace Vidly.Controllers
         [HttpGet]
         public IEnumerable<TModel> Get()
         {
-            return DefaultBO.ListAll();
-            
+            return DefaultBO.GetAll();
         }
 
         [HttpGet]

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using System.Collections.Generic;
+using Vidly.Core.DAO;
 using Vidly.Interfaces;
 
 namespace Vidly.Core.BO
@@ -27,6 +28,12 @@ namespace Vidly.Core.BO
             return Mapper.Map<TModel>(domain);
         }
 
+        public virtual IEnumerable<TModel> GetAll()
+        {
+            var domain = DefaultDAO.GetAll();
+            return Mapper.Map<IEnumerable<TModel>>(domain);
+        }
+
         public virtual TKey Save(TModel model)
         {
             TDomain domain = Mapper.Map<TDomain>(model);
@@ -36,12 +43,6 @@ namespace Vidly.Core.BO
         public virtual IEnumerable<TModel> Search(TCriteria criteria)
         {
             var domain = DefaultDAO.Search(criteria);
-            return Mapper.Map<IEnumerable<TModel>>(domain);
-        }
-
-        public virtual IEnumerable<TModel> ListAll()
-        {
-            var domain = DefaultDAO.ListAll();
             return Mapper.Map<IEnumerable<TModel>>(domain);
         }
 

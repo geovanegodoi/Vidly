@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Data.Entity;
+using System.Linq;
 using Vidly.Domain;
-using Vidly.TO;
 using Vidly.Interfaces.DAO;
+using Vidly.TO;
 
 namespace Vidly.Core.DAO
 {
@@ -31,18 +31,15 @@ namespace Vidly.Core.DAO
             return this.Context.SaveChanges();
         }
 
-        public override IEnumerable<Movie> ListAll()
-        {
-            return this.Search(new MovieCriteriaTO());
-        }
-
         public override IEnumerable<Movie> Search(MovieCriteriaTO criteria)
         {
             var retValue = this.DBSet.Include(i => i.Gender).AsQueryable();
 
-            if (!String.IsNullOrEmpty(criteria.Name))
-                retValue = this.DBSet.Where(c => c.Name == criteria.Name);
-
+            if (criteria != null)
+            {
+                if (!String.IsNullOrEmpty(criteria.Name))
+                    retValue = this.DBSet.Where(c => c.Name == criteria.Name);
+            }
             return retValue.ToList();
         }
     }

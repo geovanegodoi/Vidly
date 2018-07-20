@@ -28,6 +28,7 @@ namespace Vidly
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-signin.css",
                       "~/Content/DataTables/css/dataTables.bootstrap.css",
+                      "~/Content/font-awesome.min.css",
                       "~/Content/site.css"));
         }
     }

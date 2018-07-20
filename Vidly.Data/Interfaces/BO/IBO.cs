@@ -11,7 +11,7 @@ namespace Vidly.Interfaces
         TModel              Get     (TKey id);
         TKey                Save    (TModel model);
         IEnumerable<TModel> Search  (TCriteria criteria);
-        IEnumerable<TModel> ListAll ();
+        IEnumerable<TModel> GetAll ();
         void                Delete  (TKey id);
         void                Delete  (TModel model);
     }

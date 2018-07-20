@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Data.Entity;
-using Vidly.Domain;
+using System.Linq;
+using Vidly.Core.Domain;
 using Vidly.TO;
-using Vidly.Interfaces.DAO;
 
 namespace Vidly.Core.DAO
 {
@@ -12,7 +11,9 @@ namespace Vidly.Core.DAO
     {
         public override Customer Get(long id)
         {
-            return this.DBSet.Include(i => i.MembershipType)
+            return this.DBSet
+                       .Include(i => i.MembershipType)
+                       .Include(i => i.Role)
                        .FirstOrDefault(i => i.Id == id);
         }
 
@@ -32,18 +33,25 @@ namespace Vidly.Core.DAO
             return domain.Id;
         }
 
-        public override IEnumerable<Customer> ListAll()
-        {
-            return this.Search(new CustomerCriteriaTO());
-        }
 
         public override IEnumerable<Customer> Search(CustomerCriteriaTO criteria)
         {
-            var retValue = this.DBSet.Include(i => i.MembershipType).AsQueryable();
+            var retValue = this.DBSet
+                               .Include(i => i.MembershipType)
+                               .Include(i => i.Role)
+                               .AsQueryable();
 
-            if (!String.IsNullOrEmpty(criteria.Name))
-                retValue = this.DBSet.Where(c => c.Name == criteria.Name);
+            if (criteria != null)
+            {
+                if (!String.IsNullOrEmpty(criteria.Name))
+                    retValue = this.DBSet.Where(c => c.Name.Contains(criteria.Name));
 
+                if (!String.IsNullOrEmpty(criteria.Login))
+                    retValue = this.DBSet.Where(c => c.Login == criteria.Login);
+
+                if (!String.IsNullOrEmpty(criteria.Password))
+                    retValue = this.DBSet.Where(c => c.Password == criteria.Password);
+            }
             return retValue.ToList();
         }
     }

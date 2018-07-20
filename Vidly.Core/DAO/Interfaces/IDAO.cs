@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Vidly.Interfaces
+namespace Vidly.Core.DAO
 {
     public interface IDAO { }
 
@@ -15,7 +11,7 @@ namespace Vidly.Interfaces
         TDomain              Get     (TKey id);
         TKey                 Save    (TDomain domain);
         IEnumerable<TDomain> Search  (TCriteria criteria);
-        IEnumerable<TDomain> ListAll ( );
+        IEnumerable<TDomain> GetAll ( );
         void                 Delete  (TDomain domain);
         void                 Delete  (TKey id);
     }

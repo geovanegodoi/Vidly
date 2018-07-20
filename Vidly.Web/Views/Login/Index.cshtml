@@ -1,16 +1,198 @@
-﻿<div class="body-signin text-center">
+﻿@model Vidly.TO.CustomerTO
+
+<div class="body-signin text-center">
     <img class="mb-4" src="~/Resources/login.svg" alt="" width="150" height="150">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <form class="form-signin">
+    @*<form class="form-signin" mvcaction="~/Login/Login">
         <span id="reauth-email" class="reauth-email"></span>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div id="remember" class="checkbox">
+        <input type="email" id="Login" class="form-control" placeholder="Email address" required autofocus>
+        <input type="password" id="Password" class="form-control" placeholder="Password" required>
+        <div id="RememberMe" class="checkbox">
             <label>
-                <input type="checkbox" value="remember-me"> Remember me
+                <input name="RememberMe" type="checkbox" value=""> Remember me
             </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Login</button>
+        <button id="btnSignIn" class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
     </form>
+    <p><a class="navbar-link" href="~/Customers/New">Create an account</a></p>*@
+    @using (Html.BeginForm("Login"
+                          ,"Login"
+                          , new { ReturnUrl = ViewBag.ReturnUrl }        
+                          , FormMethod.Post        
+                          , new { @class = "form-signin" }))
+    {
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        <span id="reauth-email" class="reauth-email"></span>
+        @Html.TextBoxFor(m => m.Login   , new { @class = "form-control", placeholder = "Email address", required = "required", autofocus = "autofocus" })
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password", required = "required" })
+        <div class="checkbox">
+            <label>
+                @Html.CheckBoxFor(m => m.RememberMe) Remember Me
+            </label>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Sign in" class="btn btn-lg btn-primary btn-block btn-signin" />
+            </div>
+        </div>
+    }
     <p><a class="navbar-link" href="~/Customers/New">Create an account</a></p>
 </div>
+@section scripts {
+    <script>
+
+        function QueryString(parameter) {
+            var url = new URL(window.location.href);
+            return url.searchParams.get(parameter);
+        }
+
+        function GetDynamicallyName(value, separator) {
+
+            if (value != undefined) {
+                if (name.indexOf(separator) > 0) {
+                    var arr = name.split(separator);
+                    return arr.length == 2 ? arr[1] : undefined;
+                }
+                else {
+                    return value;
+                }
+            }
+            else
+                return value;
+        }
+
+        function GetPostData() {
+
+            var postData = {};
+
+            $("input, select").each(function (index, element) {
+
+                var jsElement = $(element);
+
+                var name = GetDynamicallyName(jsElement.attr("id"), "_");
+
+                if (name == undefined)
+                    name = GetDynamicallyName(jsElement.attr("name"), ".");
+
+                if (name != undefined) {
+
+                    if (jsElement.attr("type") == "checkbox") {
+                        postData[name] = $(this).is(":checked");
+                    } else {
+                        postData[name] = $(this).val();
+                    }
+                }
+            });
+            return postData;
+        }
+
+        function SendGETRequest(url, data, onSuccess) {
+            SendAjaxRequest("GET", url, data, onSuccess);
+        }
+
+        function SendPOSTRequest(url, data, onSuccess) {
+            SendAjaxRequest("POST", url, data, onSuccess);
+        }
+
+        function SendAjaxRequest(type, url, data, onSuccess) {
+
+            if (type != "GET" && type != "POST") {
+                return;
+            }
+            else if (url == undefined) {
+                return;
+            }
+            else if (data == undefined) {
+                return;
+            }
+            else if (onSuccess == undefined) {
+                return;
+            }
+            else {
+                $.ajax({
+                    type: type,
+                    url: url,
+                    data: JSON.stringify(data),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response != null) {
+                            alert("Name : " + response.Name + ", Designation : " + response.Designation + ", Location :" + response.Location);
+                        } else {
+                            alert("Something went wrong");
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            }
+        }
+
+        $(document).ready(function () {
+
+            $("button").filter("[type=submit]").on("click", function () {
+
+                var postData = GetPostData();
+                var postURL = $("form").attr("mvcaction");
+
+                if (postData != undefined && postURL != undefined) {
+
+                    var queryString = QueryString("ReturnUrl");
+                    postData["returnUrl"] = (queryString != undefined) ? queryString : "";
+
+                    SendPOSTRequest(postURL, postData, function (data) {
+
+                    });
+                }
+            });
+
+
+            //$("button").filter("[type=submit]").on("click", function () {
+
+            //    var AnyEmptyField = 0;
+            //    $('input,textarea,select').filter('[required]').each(function (index, element) {
+            //        if (element.value == "") {
+            //            AnyEmptyField += 1;
+            //        }
+            //    });
+            //    if (AnyEmptyField == 0) {
+            //        var dialog = bootbox.dialog({
+            //            message     : '<i class="fa fa-spin fa-spinner"></i><p class="text-center">Please wait while we do something...</p>',
+            //            closeButton : false
+            //        });
+            //        var postData = {
+            //            user : {
+            //                Login      : $("#inputEmail").val(),
+            //                Password   : $("#inputPassword").val(),
+            //                RememberMe : 0
+            //            },
+            //            returnUrl : ""
+            //        };
+            //        $.ajax({
+            //            type: "POST",
+            //            url: "/Login/Login",
+            //            data: JSON.stringify(postData),
+            //            contentType: "application/json; charset=utf-8",
+            //            dataType: "json",
+            //            success: function (response) {
+            //                if (response != null) {
+            //                    alert("Name : " + response.Name + ", Designation : " + response.Designation + ", Location :" + response.Location);
+            //                } else {
+            //                    alert("Something went wrong");
+            //                }
+            //            },
+            //            failure: function (response) {
+            //                alert(response.responseText);
+            //            },
+            //            error: function (response) {
+            //                alert(response.responseText);
+            //            }
+            //        });
+            //    }
+            //});
+        });
+
+    </script>
+}

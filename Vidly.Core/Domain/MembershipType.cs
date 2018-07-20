@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Vidly.Domain
+namespace Vidly.Core.Domain
 {
     [Table("MEMBERSHIPTYPES")]
     public class MembershipType
