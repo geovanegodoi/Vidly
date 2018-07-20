@@ -13,6 +13,9 @@ namespace Vidly.Core.Mappers
             cfg.CreateMap<Domain.MembershipType, TO.MembershipTypeTO>();
 
             cfg.CreateMap<Domain.Movie, TO.MovieTO>();
+
+            cfg.CreateMap<Domain.Rental, TO.RentalTO>()
+               .ForMember(dst => dst.MoviesRented, opt => opt.MapFrom(src => src.Movies.Count));
         }
     }
 }

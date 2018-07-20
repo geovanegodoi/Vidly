@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-using Vidly.Interfaces;
 
 namespace Vidly.Core.DAO
 {

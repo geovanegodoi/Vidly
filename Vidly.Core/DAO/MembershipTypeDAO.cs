@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Vidly.Domain;
-using Vidly.Interfaces.DAO;
+using Vidly.Core.Domain;
 using Vidly.TO;
 
 namespace Vidly.Core.DAO
 {
 
-    public class MembershipTypeDAO : BaseDAO<long, Domain.MembershipType, TO.MembershipTypeCriteriaTO>, IMembershipTypeDAO
+    public class MembershipTypeDAO : BaseDAO<long, MembershipType, MembershipTypeCriteriaTO>, IMembershipTypeDAO
     {
         public override long Save(MembershipType domain)
         {

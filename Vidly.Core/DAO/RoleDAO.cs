@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Vidly.Domain;
-using Vidly.Interfaces.DAO;
+using Vidly.Core.Domain;
 using Vidly.TO;
 
 namespace Vidly.Core.DAO
 {
 
-    public class RoleDAO : BaseDAO<long, Domain.Role, TO.RoleCriteriaTO>, IRoleDAO
+    public class RoleDAO : BaseDAO<long, Role, RoleCriteriaTO>, IRoleDAO
     {
         public override long Save(Role domain)
         {

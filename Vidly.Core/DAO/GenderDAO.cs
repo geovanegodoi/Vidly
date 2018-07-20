@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Vidly.Domain;
-using Vidly.Interfaces.DAO;
+using Vidly.Core.Domain;
 using Vidly.TO;
 
 namespace Vidly.Core.DAO
 {
 
-    public class GenderDAO : BaseDAO<long, Domain.Gender, TO.GenderCriteriaTO>, IGenderDAO
+    public class GenderDAO : BaseDAO<long, Gender, GenderCriteriaTO>, IGenderDAO
     {
         public override long Save(Gender domain)
         {

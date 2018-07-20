@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using Vidly.Domain;
-using Vidly.Interfaces.DAO;
+using Vidly.Core.Domain;
 using Vidly.TO;
 
 namespace Vidly.Core.DAO
 {
-    public class PermissionDAO : BaseDAO<long, Domain.Permission, TO.PermissionCriteriaTO>, IPermissionDAO
+    public class PermissionDAO : BaseDAO<long, Permission, PermissionCriteriaTO>, IPermissionDAO
     {
         public override Permission Get(long id)
         {

@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using Vidly.Domain;
-using Vidly.Interfaces.DAO;
+using Vidly.Core.Domain;
 using Vidly.TO;
 
 namespace Vidly.Core.DAO
 {
 
-    public class MovieDAO : BaseDAO<long, Domain.Movie, TO.MovieCriteriaTO>, IMovieDAO
+    public class MovieDAO : BaseDAO<long, Movie, MovieCriteriaTO>, IMovieDAO
     {
         public override Movie Get(long id)
         {
