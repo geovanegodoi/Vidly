@@ -37,9 +37,15 @@ namespace Vidly.Core.DAO
             if (criteria != null)
             {
                 if (!String.IsNullOrEmpty(criteria.Name))
-                    retValue = this.DBSet.Where(c => c.Name == criteria.Name);
+                    retValue = this.DBSet.Where(c => c.Name.ToUpper().Contains(criteria.Name.ToUpper()));
             }
             return retValue.ToList();
+        }
+
+        public override IEnumerable<Movie> SearchByName(string name)
+        {
+            var criteria = new MovieCriteriaTO { Name = name };
+            return this.Search(criteria);
         }
     }
 }

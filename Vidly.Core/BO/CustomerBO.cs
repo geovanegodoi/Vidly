@@ -22,6 +22,11 @@ namespace Vidly.Core.BO
             this.PermissionDAO = new PermissionDAO();
         }
 
+        public override CustomerTO CreateModelInstance()
+        {
+            return new CustomerTO();
+        }
+
         public CustomerViewModel GetViewModel()
         {
             return GetViewModel(0);

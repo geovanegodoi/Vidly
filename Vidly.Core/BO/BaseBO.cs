@@ -46,6 +46,12 @@ namespace Vidly.Core.BO
             return Mapper.Map<IEnumerable<TModel>>(domain);
         }
 
+        public virtual IEnumerable<TModel> SearchByName(string name)
+        {
+            var domain = DefaultDAO.SearchByName(name);
+            return Mapper.Map<IEnumerable<TModel>>(domain);
+        }
+
         public virtual void Delete(TModel model)
         {
             var domain = Mapper.Map<TDomain>(model);
@@ -56,6 +62,8 @@ namespace Vidly.Core.BO
         {
             DefaultDAO.Delete(id);
         }
+
+        public abstract TModel CreateModelInstance();
     }
 
     public abstract class BaseBO<TKey, TModel, TViewModel, TCriteria, TDomain, TDAO> : BaseBO<TKey, TModel, TCriteria, TDomain, TDAO>, IBO

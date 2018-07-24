@@ -33,7 +33,6 @@ namespace Vidly.Core.DAO
             return domain.Id;
         }
 
-
         public override IEnumerable<Customer> Search(CustomerCriteriaTO criteria)
         {
             var retValue = this.DBSet
@@ -44,7 +43,7 @@ namespace Vidly.Core.DAO
             if (criteria != null)
             {
                 if (!String.IsNullOrEmpty(criteria.Name))
-                    retValue = this.DBSet.Where(c => c.Name.Contains(criteria.Name));
+                    retValue = this.DBSet.Where(c => c.Name.ToUpper().Contains(criteria.Name.ToUpper()));
 
                 if (!String.IsNullOrEmpty(criteria.Login))
                     retValue = this.DBSet.Where(c => c.Login == criteria.Login);
@@ -53,6 +52,12 @@ namespace Vidly.Core.DAO
                     retValue = this.DBSet.Where(c => c.Password == criteria.Password);
             }
             return retValue.ToList();
+        }
+
+        public override IEnumerable<Customer> SearchByName(string name)
+        {
+            var criteria = new CustomerCriteriaTO { Name = name };
+            return this.Search(criteria);
         }
     }
 }

@@ -37,7 +37,8 @@ namespace Vidly.Controllers
         [HttpGet]
         public virtual ActionResult New()
         {
-            return View("Save");
+            var model = DefaultBO.CreateModelInstance();
+            return View("Save", model);
         }
 
         [HttpPost]

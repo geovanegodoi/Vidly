@@ -17,6 +17,11 @@ namespace Vidly.Core.BO
             this.GenderDAO  = new GenderDAO();
         }
 
+        public override MovieTO CreateModelInstance()
+        {
+            return new MovieTO();
+        }
+
         public MovieViewModel GetViewModel()
         {
             return GetViewModel(0);

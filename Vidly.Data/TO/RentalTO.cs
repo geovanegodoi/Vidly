@@ -9,12 +9,18 @@ namespace Vidly.TO
     {
         public long Id { get; set; }
 
-        public string CustomerName { get; set; }
+        public long CustomerId { get; set; }
 
-        public int MoviesRented { get; set; }
+        public CustomerTO Customer { get; set; }
 
-        public DateTime DateRent { get; set; }
+        public ICollection<long> MoviesId { get; set; }
 
-        public DateTime DateReturn { get; set; }
+        public ICollection<MovieTO> Movies { get; set; }
+
+        [Display(Name = "Date Rented")]
+        public DateTime? DateRent { get; set; }
+
+        [Display(Name = "Date Returned")]
+        public DateTime? DateReturn { get; set; }
     }
 }

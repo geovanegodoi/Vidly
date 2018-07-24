@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System.Linq;
 
 namespace Vidly.Core.Mappers
 {
@@ -15,7 +16,7 @@ namespace Vidly.Core.Mappers
             cfg.CreateMap<Domain.Movie, TO.MovieTO>();
 
             cfg.CreateMap<Domain.Rental, TO.RentalTO>()
-               .ForMember(dst => dst.MoviesRented, opt => opt.MapFrom(src => src.Movies.Count));
+               .ForMember(dst => dst.MoviesId, opt => opt.MapFrom(src => src.Movies.Select(s => s.Id).ToList()));
         }
     }
 }

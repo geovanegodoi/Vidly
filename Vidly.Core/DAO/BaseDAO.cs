@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 
 namespace Vidly.Core.DAO
@@ -16,6 +17,11 @@ namespace Vidly.Core.DAO
         public abstract TKey Save(TDomain domain);
 
         public abstract IEnumerable<TDomain> Search(TCriteria criteria);
+
+        public virtual IEnumerable<TDomain> SearchByName(string name)
+        {
+            throw new NotImplementedException();
+        }
 
         public virtual TDomain Get(TKey id)
         {
