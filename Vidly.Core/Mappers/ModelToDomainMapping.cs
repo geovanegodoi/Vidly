@@ -13,7 +13,6 @@ namespace Vidly.Core.Mappers
             cfg.CreateMap<TO.MembershipTypeTO, Domain.MembershipType>();
 
             cfg.CreateMap<TO.MovieTO, Domain.Movie>();
-
         }
     }
 }

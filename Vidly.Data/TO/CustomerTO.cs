@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Vidly.Validation;
 
 namespace Vidly.TO
@@ -24,5 +21,13 @@ namespace Vidly.TO
 
         [Min18YearsIfAMember]
         public Nullable<DateTime> Birthdate { get; set; }
+
+        public string Login { get; set; }
+
+        public string Password { get; set; }
+
+        public bool RememberMe { get; set; }
+
+        public IEnumerable<PermissionTO> Permissions { get; set; }
     }
 }

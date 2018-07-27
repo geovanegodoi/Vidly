@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Data.Entity;
-using Vidly.Domain;
+using System.Linq;
+using Vidly.Core.Domain;
 using Vidly.TO;
-using Vidly.Interfaces.DAO;
 
 namespace Vidly.Core.DAO
 {
 
-    public class MovieDAO : BaseDAO<long, Domain.Movie, TO.MovieCriteriaTO>, IMovieDAO
+    public class MovieDAO : BaseDAO<long, Movie, MovieCriteriaTO>, IMovieDAO
     {
         public override Movie Get(long id)
         {
@@ -17,33 +16,22 @@ namespace Vidly.Core.DAO
                        .FirstOrDefault(i => i.Id == id);
         }
 
-        public override long Save(Domain.Movie domain)
-        {
-            if (domain.Id == 0)
-            {
-                this.DBSet.Add(domain);
-            }
-            else
-            {
-                var entity = this.Get(domain.Id);
-                this.Context.Entry(entity).CurrentValues.SetValues(domain);
-            }
-            return this.Context.SaveChanges();
-        }
-
-        public override IEnumerable<Movie> ListAll()
-        {
-            return this.Search(new MovieCriteriaTO());
-        }
-
         public override IEnumerable<Movie> Search(MovieCriteriaTO criteria)
         {
             var retValue = this.DBSet.Include(i => i.Gender).AsQueryable();
 
-            if (!String.IsNullOrEmpty(criteria.Name))
-                retValue = this.DBSet.Where(c => c.Name == criteria.Name);
-
+            if (criteria != null)
+            {
+                if (!String.IsNullOrEmpty(criteria.Name))
+                    retValue = this.DBSet.Where(c => c.Name.ToUpper().Contains(criteria.Name.ToUpper()));
+            }
             return retValue.ToList();
+        }
+
+        public override IEnumerable<Movie> SearchByName(string name)
+        {
+            var criteria = new MovieCriteriaTO { Name = name };
+            return this.Search(criteria);
         }
     }
 }
