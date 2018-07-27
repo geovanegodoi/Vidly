@@ -8,12 +8,13 @@ namespace Vidly.Interfaces
         where TModel    : class
         where TCriteria : class
     {
-        TModel              Get     (TKey id);
-        TKey                Save    (TModel model);
-        IEnumerable<TModel> Search  (TCriteria criteria);
-        IEnumerable<TModel> ListAll ();
-        void                Delete  (TKey id);
-        void                Delete  (TModel model);
+        TModel              Get   (TKey id);
+        TKey                Save  (TModel model);
+        IEnumerable<TModel> Search(TCriteria criteria);
+        IEnumerable<TModel> SearchByName(string name);
+        IEnumerable<TModel> GetAll();        
+        void                Delete(TKey id);
+        void                Delete(TModel model);
     }
 
     public interface IBO<TKey, TModel, TViewModel, TCriteria> : IBO<TKey, TModel, TCriteria>
@@ -21,8 +22,8 @@ namespace Vidly.Interfaces
         where TViewModel : class
         where TCriteria  : class
     {
-        TKey        Save(TViewModel viewModel);
-        TViewModel  GetViewModel();
-        TViewModel  GetViewModel(TKey id);
+        TKey       Save(TViewModel viewModel);
+        TViewModel GetViewModel();
+        TViewModel GetViewModel(TKey id);
     }
 }

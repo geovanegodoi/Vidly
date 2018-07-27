@@ -9,6 +9,7 @@ namespace Vidly.Core.Mappers
             Mapper.Initialize(cfg =>
             {
                 DomainToModelMapping.ApplyMapping(cfg);
+                ModelToCriteriaMapping.ApplyMapping(cfg);
                 ModelToDomainMapping.ApplyMapping(cfg);
                 ViewModelToModelMapping.ApplyMapping(cfg);
             });

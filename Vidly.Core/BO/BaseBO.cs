@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
+using Vidly.Core.DAO;
 using Vidly.Interfaces;
 
 namespace Vidly.Core.BO
@@ -27,6 +29,12 @@ namespace Vidly.Core.BO
             return Mapper.Map<TModel>(domain);
         }
 
+        public virtual IEnumerable<TModel> GetAll()
+        {
+            var domain = DefaultDAO.GetAll();
+            return Mapper.Map<IEnumerable<TModel>>(domain);
+        }
+
         public virtual TKey Save(TModel model)
         {
             TDomain domain = Mapper.Map<TDomain>(model);
@@ -39,9 +47,9 @@ namespace Vidly.Core.BO
             return Mapper.Map<IEnumerable<TModel>>(domain);
         }
 
-        public virtual IEnumerable<TModel> ListAll()
+        public virtual IEnumerable<TModel> SearchByName(string name)
         {
-            var domain = DefaultDAO.ListAll();
+            var domain = DefaultDAO.SearchByName(name);
             return Mapper.Map<IEnumerable<TModel>>(domain);
         }
 
@@ -57,16 +65,20 @@ namespace Vidly.Core.BO
         }
     }
 
-    public abstract class BaseBO<TKey, TModel, TViewModel, TCriteria, TDomain, TDAO> : BaseBO<TKey, TModel, TCriteria, TDomain, TDAO>, IBO
+    public abstract class BaseBO<TKey, TModel, TViewModel, TCriteria, TDomain, TDAO> : BaseBO<TKey, TModel, TCriteria, TDomain, TDAO>, IBO<TKey, TModel, TViewModel, TCriteria>
         where TModel     : class
         where TViewModel : class
         where TCriteria  : class
         where TDomain    : class
         where TDAO       : IDAO<TKey, TDomain, TCriteria>
     {
+        public abstract TViewModel GetViewModel();
+
+        public abstract TViewModel GetViewModel(TKey id);
+
         public TKey Save(TViewModel viewModel)
         {
-            var model  = Mapper.Map<TModel>(viewModel);
+            var model = Mapper.Map<TModel>(viewModel);
             return base.Save(model);
         }
     }

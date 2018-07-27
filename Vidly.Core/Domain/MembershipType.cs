@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Vidly.Domain
+namespace Vidly.Core.Domain
 {
     [Table("MEMBERSHIPTYPES")]
-    public class MembershipType
+    public class MembershipType : BaseEntity<long>
     {
-        [Column("ID")]
-        public long Id { get; set; }
-
         [Column("SIGNUPFEE")]
         public short SignUpFee { get; set; }
 

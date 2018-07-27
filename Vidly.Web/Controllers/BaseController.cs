@@ -37,7 +37,8 @@ namespace Vidly.Controllers
         [HttpGet]
         public virtual ActionResult New()
         {
-            return View("Save");
+            var model = Activator.CreateInstance<TModel>();
+            return View("Save", model);
         }
 
         [HttpPost]
@@ -83,7 +84,7 @@ namespace Vidly.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveViewModel(TViewModel viewModel)
+        public virtual ActionResult SaveViewModel(TViewModel viewModel)
         {
             DefaultBO.Save(viewModel);
             return RedirectToAction("Index");

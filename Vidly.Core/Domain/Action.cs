@@ -1,13 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Vidly.Domain
+namespace Vidly.Core.Domain
 {
-    [Table("GENDERS")]
-    public class Gender
+    [Table("ACTIONS")]
+    public class Action : BaseEntity<long>
     {
-        [Column("ID")]
-        public long Id { get; set; }
-
         [Column("NAME")]
         public string Name { get; set; }
     }

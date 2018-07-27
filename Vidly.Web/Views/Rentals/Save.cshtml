@@ -1,0 +1,123 @@
+﻿@model Vidly.TO.RentalTO
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container" style="background-color:whitesmoke; border-radius:6px">
+    <h2>@Html.Raw(Model.Id == 0 ? "New Rental" : "Edit Rental")</h2>
+    <hr />
+    <div class="container" style="padding:15px 15px 15px 15px">
+        @using (Html.BeginForm("Save", "Rentals", FormMethod.Post, new { id = "formRental" }))
+        {
+            @Html.ValidationSummary(true)
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.HiddenFor(model => model.Id)
+                <div class="form-group">
+                    <label>Customer Name</label>
+                    <div class="tt-container">
+                        <input id="customerName" type="text" value="" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Movie Name</label>
+                    <div class="tt-container">
+                        <input id="movieName" type="text" value="" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <ul id="movies" class="list-group"></ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-1 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<br />
+@Html.ActionLink("Back", "Index", "Rentals", null, new { @class = "btn btn-warning btn-sm" })
+@section scripts
+{
+            <script type="text/javascript">
+
+                var vm = {
+                    customerId : 0,
+                    moviesId   : []
+                }
+
+                $(document).ready(function () {
+
+                    var customers = new Bloodhound({
+                        datumTokenizer: Bloodhound.tokenizers.obj.whitespace("name"),
+                        queryTokenizer: Bloodhound.tokenizers.whitespace,
+                        remote: {
+                            url: '@Url.Content("~/api/customers?query=%QUERY")',
+                            wildcard: "%QUERY"
+                        }
+                    });
+
+                    var movies = new Bloodhound({
+                        datumTokenizer: Bloodhound.tokenizers.obj.whitespace("name"),
+                        queryTokenizer: Bloodhound.tokenizers.whitespace,
+                        remote: {
+                            url: '@Url.Content("~/api/movies?query=%QUERY")',
+                            wildcard: "%QUERY"
+                        }
+                    });
+
+                    $("#customerName").focus();
+
+                    $("#customerName").typeahead({
+                        minLength: 2,
+                        highlight: true
+                    },
+                    {
+                        name: "customerName",
+                        display: "name",
+                        source: customers
+                    })
+                    .on("typeahead:select", function (e, customer) {
+                        vm.customerId = customer.id;
+                        $("#movieName").focus();
+                    });
+
+                    $("#movieName").typeahead({
+                        minLength: 2,
+                        highlight: true
+                    },
+                    {
+                        name: "movieName",
+                        display: "name",
+                        source: movies
+                    })
+                    .on("typeahead:select", function (e, movie) {
+                        if ($("#movies").find("li:contains('" + movie.name + "')").length == 0) {
+                            $("#movies").append("<li class='list-group-item'>" + movie.name + "</li>");
+                            vm.moviesId.push(movie.id);
+                        }
+                        $('#movieName').typeahead("val", "");
+                        });
+
+                    $("#formRental").submit(function (e) {
+                        e.preventDefault();
+                        $.ajax({
+                            url    : '@Url.Content("~/Rentals/Save")',
+                            method : "POST",
+                            data   : vm
+                        })
+                        .done(function () {
+                            window.top.location.href = '@Url.Action("Index", "Rentals")';
+                        })
+                        .fail(function () {
+
+                        })
+                    });
+                });
+            </script>
+        }

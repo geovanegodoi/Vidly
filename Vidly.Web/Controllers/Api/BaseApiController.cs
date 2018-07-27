@@ -19,10 +19,16 @@ namespace Vidly.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<TModel> Get()
+        public IEnumerable<TModel> Get(string query = null)
         {
-            return DefaultBO.ListAll();
-            
+            if (!string.IsNullOrEmpty(query))
+            {
+                return DefaultBO.SearchByName(query);
+            }
+            else
+            {
+                return DefaultBO.GetAll();
+            }
         }
 
         [HttpGet]

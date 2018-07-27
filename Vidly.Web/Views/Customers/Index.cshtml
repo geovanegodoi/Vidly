@@ -1,66 +1,91 @@
 ﻿@model IEnumerable<Vidly.TO.CustomerTO>
-
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Customers</h2>
-<table id="customers" class="table table-hover">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Name)</th>
-            <th>@Html.DisplayNameFor(model => model.MembershipType)</th>
-            <th>@Html.DisplayNameFor(model => model.MembershipType.DiscountRate)</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-
-</table>
-<p>
-    @Html.ActionLink("New Customer", "New", "Customers", null, new { @class = "btn btn-success btn-sm" })
-</p>
+<div class="container" style="background-color:whitesmoke; border-radius:6px">
+    <h2>Customers</h2>
+    <hr />
+    <div class="container" style="padding:15px 15px 15px 15px">
+        <table id="customers" class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="col-sm-3">@Html.DisplayNameFor(model => model.Name)</th>
+                    <th class="col-sm-3">@Html.DisplayNameFor(model => model.MembershipType)</th>
+                    <th class="col-sm-3">@Html.DisplayNameFor(model => model.MembershipType.DiscountRate)</th>
+                    <th class="col-sm-2"></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<br />
+@Html.ActionLink("New Customer", "New", "Customers", null, new { @class = "btn btn-success btn-sm" })
 @section scripts
 {
     <script>
-        var jsTable   = "#customers";
-        var urlGetApi = "/api/customers";
+        var jsTable = "#customers";
+        var urlApi = '@Url.Content("~/api/customers/")';
 
         $(document).ready(function () {
 
-            var t = $(jsTable).DataTable({
-                ajax: {
-                    url: urlGetApi,
-                    dataSrc: ""
-                },
-                columns: [
-                    {
-                        data: "name"
+            var dialog = null;
+            var dtTable = $(jsTable)
+                .on('preXhr.dt', function (e, settings, data) {
+                    dialog = bootbox.dialog({
+                        message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> Loading...</div>',
+                        closeButton: false
+                    });
+                })
+                .on('xhr.dt', function (e, settings, json, xhr) {
+                    dialog.modal('hide');
+                })
+                .DataTable({
+                    ajax: {
+                        url     : urlApi,
+                        dataSrc : ""
                     },
-                    {
-                        data: "membershipType.name"
-                    },
-                    {
-                        data: "membershipType.discountRate"
-                    },
-                    {
-                        data: "id",
-                        render: function (data) {
-                            return "<button data-customer-id=" + data + " class='btn btn-danger btn-sm btn-block js-delete'>Delete</button>"
+                    columns: [
+                        {
+                            data: "name"
+                        },
+                        {
+                            data: "membershipType.name"
+                        },
+                        {
+                            data: "membershipType.discountRate"
+                        },
+                        {
+                            data: "id",
+                            render: function (data) {
+                                return "<div class='btn-group'>"
+                                     + "<button data-id=" + data + " class='btn btn-primary data-view'>View</button>"
+                                     + "<button data-id=" + data + " class='btn btn-warning data-edit'>Edit</button>"
+                                     + "<button data-id=" + data + " class='btn btn-danger  data-delete'>Delete</button>"
+                                     + "</div>"
+                            }
                         }
-                    }
-                ]
-            });
-            $(jsTable).on("click", ".js-delete", function (e) {
+                    ]
+                });
+            $(jsTable)
+            .on("click", ".data-view", function (e) {
+                e.preventDefault();
+                window.top.location.href = '@Url.Action("Details", "Customers")/' + $(this).attr("data-id");
+            })
+            .on("click", ".data-edit", function (e) {
+                e.preventDefault();
+                window.top.location.href = '@Url.Action("Edit", "Customers")/' + $(this).attr("data-id");
+            })
+            .on("click", ".data-delete", function (e) {
                 e.preventDefault();
                 var button = $(this);
-                bootbox.confirm("Are you sure you want to delete this customer?", function (result) {
+                bootbox.confirm("Are you sure you want to delete this Customer?", function (result) {
                     if (result) {
                         $.ajax({
-                            url: urlGetApi + button.attr("data-customer-id"),
-                            method: "DELETE",
-                            success: function () {
+                            url     : urlApi + button.attr("data-id"),
+                            method  : "DELETE",
+                            success : function () {
                                 dtTable.row(button.parents("tr")).remove().draw();
                             }
                         });

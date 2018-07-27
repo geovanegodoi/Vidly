@@ -1,18 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Vidly.Domain
+namespace Vidly.Core.Domain
 {
     [Table("MOVIES")]
-    public class Movie
+    public class Movie : BaseEntity<long>
     {
-        [Column("ID")]
-        public long Id { get; set; }
-
         [Column("NAME")]
         public string Name { get; set; }
 
@@ -29,5 +23,12 @@ namespace Vidly.Domain
         public int Stock { get; set; }
 
         public Gender Gender { get; set; }
+
+        public ICollection<Rental> Rentals { get; set; }
+
+        public Movie()
+        {
+            this.Rentals = new HashSet<Rental>();
+        }
     }
 }
