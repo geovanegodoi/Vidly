@@ -12,28 +12,38 @@ namespace Vidly.Core.BO
 {
     public class RentalBO : BaseBO<long, RentalTO, RentalCriteriaTO, Rental, IRentalDAO>, IRentalBO
     {
-        private IMovieBO MovieBO = null;
+        private IMovieDAO MovieDAO = null;
 
         public RentalBO()
         {
             this.DefaultDAO = new RentalDAO();
-            this.MovieBO    = new MovieBO();
-        }
-
-        public override RentalTO CreateModelInstance()
-        {
-            return new RentalTO();
+            this.MovieDAO   = new MovieDAO();
         }
 
         public override long Save(RentalTO model)
         {
-            model.Movies = new List<MovieTO>();
+            Domain.Rental domain = null;
 
-            foreach (var movieId in model.MoviesId)
+            if (model.Id != 0)
+                domain = DefaultDAO.Get(model.Id);
+            else
+                domain = new Domain.Rental();
+
+            Mapper.Map(model, domain);
+
+            foreach(var item in domain.Movies.Where(a => model.MoviesId == null || !model.MoviesId.Contains(a.Id)).ToList())
             {
-                model.Movies.Add(MovieBO.Get(movieId));
+                domain.Movies.Remove(item);
             }
-            return base.Save(model);
+
+            if (model.MoviesId != null)
+            {
+                foreach (var item in model.MoviesId.Except(domain.Movies.Select(a => a.Id)).ToList())
+                {
+                    domain.Movies.Add(MovieDAO.GetReference(item));
+                }
+            }
+            return DefaultDAO.Save(domain);
         }
     }
 }

@@ -5,11 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Vidly.Core.Domain
 {
     [Table("MOVIES")]
-    public class Movie
+    public class Movie : BaseEntity<long>
     {
-        [Column("ID")]
-        public long Id { get; set; }
-
         [Column("NAME")]
         public string Name { get; set; }
 
@@ -28,5 +25,10 @@ namespace Vidly.Core.Domain
         public Gender Gender { get; set; }
 
         public ICollection<Rental> Rentals { get; set; }
+
+        public Movie()
+        {
+            this.Rentals = new HashSet<Rental>();
+        }
     }
 }

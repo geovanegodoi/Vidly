@@ -3,11 +3,8 @@
 namespace Vidly.Core.Domain
 {
     [Table("GENDERS")]
-    public class Gender
+    public class Gender : BaseEntity<long>
     {
-        [Column("ID")]
-        public long Id { get; set; }
-
         [Column("NAME")]
         public string Name { get; set; }
     }

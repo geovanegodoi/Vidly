@@ -13,31 +13,15 @@ namespace Vidly.Core.DAO
         {
             return this.DBSet
                        .Include(i => i.MembershipType)
-                       .Include(i => i.Role)
+                       //.Include(i => i.Role)
                        .FirstOrDefault(i => i.Id == id);
-        }
-
-        public override long Save(Domain.Customer domain)
-        {
-            if (domain.Id == 0)
-            {
-                this.DBSet.Add(domain);
-            }
-            else
-            {
-                var entity = this.Get(domain.Id);
-                this.Context.Entry(entity).CurrentValues.SetValues(domain);
-            }
-            this.Context.SaveChanges();
-
-            return domain.Id;
         }
 
         public override IEnumerable<Customer> Search(CustomerCriteriaTO criteria)
         {
             var retValue = this.DBSet
                                .Include(i => i.MembershipType)
-                               .Include(i => i.Role)
+                               //.Include(i => i.Role)
                                .AsQueryable();
 
             if (criteria != null)

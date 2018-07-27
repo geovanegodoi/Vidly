@@ -43,6 +43,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,7 +56,9 @@
     <Compile Include="BO\RentalBO.cs" />
     <Compile Include="BO\MovieBO.cs" />
     <Compile Include="BO\CustomerBO.cs" />
+    <Compile Include="Context\SimpleContext.cs" />
     <Compile Include="DAO\BaseDAO.cs" />
+    <Compile Include="DAO\BaseEntityContextDAO.cs" />
     <Compile Include="DAO\RentalDAO.cs" />
     <Compile Include="DAO\Interfaces\IActionDAO.cs" />
     <Compile Include="DAO\Interfaces\IRentalDAO.cs" />
@@ -75,6 +78,7 @@
     <Compile Include="DAO\CustomerDAO.cs" />
     <Compile Include="DAO\EntitiesContext.cs" />
     <Compile Include="Domain\Action.cs" />
+    <Compile Include="Domain\BaseEntity.cs" />
     <Compile Include="Domain\Rental.cs" />
     <Compile Include="Domain\Customer.cs" />
     <Compile Include="Domain\Form.cs" />
@@ -83,6 +87,7 @@
     <Compile Include="Domain\Movie.cs" />
     <Compile Include="Domain\Permission.cs" />
     <Compile Include="Domain\Role.cs" />
+    <Compile Include="Extensions\DbContextExtension.cs" />
     <Compile Include="Mappers\AutoMapperConfig.cs" />
     <Compile Include="Mappers\ModelToCriteriaMapping.cs" />
     <Compile Include="Mappers\ViewModelToModelMapping.cs" />

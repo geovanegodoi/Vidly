@@ -26,12 +26,12 @@
 {
     <script>
         var jsTable = "#customers";
-        var urlApi = "/api/customers";
+        var urlApi = '@Url.Content("~/api/customers/")';
 
         $(document).ready(function () {
 
             var dialog = null;
-            var t = $(jsTable)
+            var dtTable = $(jsTable)
                 .on('preXhr.dt', function (e, settings, data) {
                     dialog = bootbox.dialog({
                         message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> Loading...</div>',

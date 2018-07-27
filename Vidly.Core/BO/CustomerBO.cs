@@ -22,17 +22,12 @@ namespace Vidly.Core.BO
             this.PermissionDAO = new PermissionDAO();
         }
 
-        public override CustomerTO CreateModelInstance()
-        {
-            return new CustomerTO();
-        }
-
-        public CustomerViewModel GetViewModel()
+        public override CustomerViewModel GetViewModel()
         {
             return GetViewModel(0);
         }
 
-        public CustomerViewModel GetViewModel(long id)
+        public override CustomerViewModel GetViewModel(long id)
         {
             var membershiptypes = Mapper.Map<IEnumerable<MembershipTypeTO>>(this.MembershipTypeDAO.GetAll());
             var customer = (id == 0) ? new CustomerTO() : Mapper.Map<CustomerTO>(DefaultDAO.Get(id));

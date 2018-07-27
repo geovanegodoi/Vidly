@@ -16,20 +16,6 @@ namespace Vidly.Core.DAO
                        .FirstOrDefault(i => i.Id == id);
         }
 
-        public override long Save(Domain.Movie domain)
-        {
-            if (domain.Id == 0)
-            {
-                this.DBSet.Add(domain);
-            }
-            else
-            {
-                var entity = this.Get(domain.Id);
-                this.Context.Entry(entity).CurrentValues.SetValues(domain);
-            }
-            return this.Context.SaveChanges();
-        }
-
         public override IEnumerable<Movie> Search(MovieCriteriaTO criteria)
         {
             var retValue = this.DBSet.Include(i => i.Gender).AsQueryable();

@@ -1,4 +1,4 @@
-﻿@model Vidly.TO.CustomerTO
+﻿@model Vidly.TO.RentalTO
 
 @{
     ViewBag.Title = "Details";
@@ -9,17 +9,7 @@
 
 <div>
     <hr />
-    <h4>@Html.DisplayFor(model => model.Name)</h4>
-    <ul>
-        <li>
-            @Html.DisplayNameFor(model => model.MembershipType) : 
-            @Html.DisplayFor(model => model.MembershipType.Name)
-        </li>
-        <li>
-            @Html.DisplayNameFor(model => model.Birthdate) :
-            @Html.DisplayFor(model => model.Birthdate)
-        </li>
-    </ul>
+    
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

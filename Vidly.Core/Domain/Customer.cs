@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Vidly.Core.Domain
 {
     [Table("CUSTOMERS")]
-    public class Customer
+    public class Customer : BaseEntity<long>
     {
-        [Column("ID")]
-        public long Id { get; set; }
-
         [Column("NAME")]
         public string Name { get; set; }
 

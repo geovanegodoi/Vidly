@@ -17,17 +17,12 @@ namespace Vidly.Core.BO
             this.GenderDAO  = new GenderDAO();
         }
 
-        public override MovieTO CreateModelInstance()
-        {
-            return new MovieTO();
-        }
-
-        public MovieViewModel GetViewModel()
+        public override MovieViewModel GetViewModel()
         {
             return GetViewModel(0);
         }
 
-        public MovieViewModel GetViewModel(long id)
+        public override MovieViewModel GetViewModel(long id)
         {
             var genders = Mapper.Map<IEnumerable<GenderTO>>(this.GenderDAO.GetAll());
             var movie   = (id == 0) ? new MovieTO() : Mapper.Map<MovieTO>(DefaultDAO.Get(id));

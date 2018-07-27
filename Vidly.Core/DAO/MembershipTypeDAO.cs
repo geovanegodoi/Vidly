@@ -8,20 +8,6 @@ namespace Vidly.Core.DAO
 
     public class MembershipTypeDAO : BaseDAO<long, MembershipType, MembershipTypeCriteriaTO>, IMembershipTypeDAO
     {
-        public override long Save(MembershipType domain)
-        {
-            if (domain.Id == 0)
-            {
-                this.DBSet.Add(domain);
-            }
-            else
-            {
-                var entity = this.Get(domain.Id);
-                this.Context.Entry(entity).CurrentValues.SetValues(domain);
-            }
-            return this.Context.SaveChanges();
-        }
-
         public override IEnumerable<MembershipType> Search(MembershipTypeCriteriaTO criteria)
         {
             var retValue = this.DBSet.AsQueryable();

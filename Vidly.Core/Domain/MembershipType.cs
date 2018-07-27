@@ -3,11 +3,8 @@
 namespace Vidly.Core.Domain
 {
     [Table("MEMBERSHIPTYPES")]
-    public class MembershipType
+    public class MembershipType : BaseEntity<long>
     {
-        [Column("ID")]
-        public long Id { get; set; }
-
         [Column("SIGNUPFEE")]
         public short SignUpFee { get; set; }
 

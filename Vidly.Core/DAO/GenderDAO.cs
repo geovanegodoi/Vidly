@@ -8,20 +8,6 @@ namespace Vidly.Core.DAO
 
     public class GenderDAO : BaseDAO<long, Gender, GenderCriteriaTO>, IGenderDAO
     {
-        public override long Save(Gender domain)
-        {
-            if (domain.Id == 0)
-            {
-                this.DBSet.Add(domain);
-            }
-            else
-            {
-                var entity = this.Get(domain.Id);
-                this.Context.Entry(entity).CurrentValues.SetValues(domain);
-            }
-            return this.Context.SaveChanges();
-        }
-
         public override IEnumerable<Gender> Search(GenderCriteriaTO criteria)
         {
             var retValue = this.DBSet.AsQueryable();

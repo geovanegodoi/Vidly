@@ -8,12 +8,13 @@ namespace Vidly.Core.DAO
         where TDomain : class
         where TCriteria : class
     {
-        TDomain              Get   (TKey id);
-        TKey                 Save  (TDomain domain);
-        IEnumerable<TDomain> Search(TCriteria criteria);
+        TDomain              Get         (TKey id);
+        TDomain              GetReference(TKey id);
+        TKey                 Save        (TDomain domain);
+        IEnumerable<TDomain> Search      (TCriteria criteria);
         IEnumerable<TDomain> SearchByName(string name);
-        IEnumerable<TDomain> GetAll( );
-        void                 Delete(TDomain domain);
-        void                 Delete(TKey id);
+        IEnumerable<TDomain> GetAll      ( );
+        void                 Delete      (TDomain domain);
+        void                 Delete      (TKey id);
     }
 }

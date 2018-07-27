@@ -17,23 +17,6 @@ namespace Vidly.Core.DAO
                        .FirstOrDefault(i => i.Id == id);
         }
 
-        public override long Save(Rental domain)
-        {
-            if (domain.Id == 0)
-            {
-                this.DBSet.Add(domain);
-            }
-            else
-            {
-                var entity = this.Get(domain.Id);
-                this.Context.Entry(entity).CurrentValues.SetValues(domain);
-            }
-            this.Context.SaveChanges();
-
-            return domain.Id;
-        }
-
-
         public override IEnumerable<Rental> Search(RentalCriteriaTO criteria)
         {
             var query = this.DBSet

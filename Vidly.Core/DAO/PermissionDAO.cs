@@ -14,13 +14,6 @@ namespace Vidly.Core.DAO
             throw new NotImplementedException();
         }
 
-        public override long Save(Permission domain)
-        {
-            this.DBSet.Add(domain);
-            this.Context.SaveChanges();
-            return 0;
-        }
-
         public override IEnumerable<Permission> Search(PermissionCriteriaTO criteria)
         {
             var retValue = this.DBSet
